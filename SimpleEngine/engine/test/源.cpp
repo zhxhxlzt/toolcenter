@@ -1,6 +1,8 @@
 #include<iostream>
 #include "Object.h"
 #include "World.h"
+#include <set>
+
 using namespace std;
 
 //int main()
@@ -17,3 +19,23 @@ using namespace std;
 //	getchar();
 //	return 0;
 //}
+int main()
+{
+	set<int> ins = { 1, 5, 34, 2, 9, 0 };
+
+	for (auto it = ins.begin(); it != ins.end();)
+	{
+		if (*it < 10)
+		{
+			auto last = it++;
+			ins.erase(last);
+		}
+		else
+			it++;
+	}
+
+	for (auto &e : ins)
+		cout << e << endl;
+	getchar();
+	return 0;
+}

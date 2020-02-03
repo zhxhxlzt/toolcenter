@@ -43,18 +43,25 @@
     <ClCompile Include="metainfo\meta_Transform.cpp">
       <Filter>meta</Filter>
     </ClCompile>
-    <ClCompile Include="metainfo\meta_World.cpp">
+    <ClCompile Include="metainfo\meta_Application.cpp">
       <Filter>meta</Filter>
     </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerMgr.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_TimerMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
       <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="MetaObject.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="World.h">
       <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="BaseComponent.h">
@@ -73,6 +80,12 @@
       <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="Delegate.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="TimerMgr.h">
       <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>
