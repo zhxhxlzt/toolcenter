@@ -55,10 +55,12 @@ map<string, MetaObject*> MetaObject::metaObjects = {
 if __name__ == '__main__':
     classNameToID = {}
     fileNameToClassName = {}
+    childToParent = {}
     root = pathlib.Path(root_path)
     target_path = pathlib.Path(target_dir)
     if not target_path.exists():
         target_path.mkdir()
+
     for e in root.rglob("*.h"):
         with open(e) as fp:
             code = fp.read()
@@ -69,12 +71,23 @@ if __name__ == '__main__':
                 classID = getClassID()
                 classNameToID[className] = classID
                 parentName = res.group('parentName') or ""
-                parentID = classNameToID.get(parentName, -1)
-                info = meta_info % (e.name, className, className, parentName, classID, parentID)
-                fileName = f"meta_{e.stem}.cpp"
-                filePath = target_path / fileName
-                with open(filePath, "w") as metaFile:
-                    metaFile.write(info)
+                childToParent[className] = parentName
+                # parentID = classNameToID.get(parentName, -1)
+                # info = meta_info % (e.name, className, className, parentName, classID, parentID)
+                # fileName = f"meta_{e.stem}.cpp"
+                # filePath = target_path / fileName
+                # with open(filePath, "w") as metaFile:
+                #     metaFile.write(info)
+
+    for fileName, childName in fileNameToClassName.items():
+        childID = classNameToID[childName]
+        parentName = childToParent[childName]
+        parentID = classNameToID.get(parentName, -1)
+        info = meta_info % (fileName, childName, childName, parentName, childID, parentID)
+        fileNameCpp = fileName.replace(".h", ".cpp")
+        filePath = target_path / ("meta_" + fileNameCpp)
+        with open(filePath, "w") as metaFile:
+            metaFile.write(info)
     code = getMetaCode(fileNameToClassName)
     with open(target_path / "meta_ClassInfo.cpp", "w") as fp:
         fp.write(code)
