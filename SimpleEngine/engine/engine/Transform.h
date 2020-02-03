@@ -1,8 +1,10 @@
 #pragma once
 
 #include "Component.h"
-
-class Transform : public Component
+namespace yk
 {
-	META_OBJECT
-};
+	class Transform : public Component
+	{
+		META_OBJECT
+	};
+}

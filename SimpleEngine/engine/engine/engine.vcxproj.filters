@@ -10,6 +10,12 @@
     <Filter Include="meta">
       <UniqueIdentifier>{7173abc1-f27c-49e0-a9f3-e1b49c21f6d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{e047da53-c71a-4c40-8bab-474b2f0f7d13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="io">
+      <UniqueIdentifier>{b8f7c1f5-3637-4030-8de2-5c3367b49b0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Object.cpp">
@@ -58,6 +64,21 @@
     <ClCompile Include="metainfo\meta_TimerMgr.cpp">
       <Filter>meta</Filter>
     </ClCompile>
+    <ClCompile Include="glad.c">
+      <Filter>thirdparty</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_Input.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_Window.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -89,6 +110,12 @@
     </ClInclude>
     <ClInclude Include="TimerMgr.h">
       <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>io</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

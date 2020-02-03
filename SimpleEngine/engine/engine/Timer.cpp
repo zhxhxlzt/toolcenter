@@ -1,5 +1,6 @@
 #include "Timer.h"
 #include "TimerMgr.h"
+using namespace yk;
 
 static size_t timerID = 0;
 

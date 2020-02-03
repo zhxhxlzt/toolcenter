@@ -2,17 +2,21 @@
 #include "Object.h"
 #include <assert.h>
 #include "TimerMgr.h"
-class Application : public Object
+
+namespace yk
 {
-	META_OBJECT
+	class Application : public Object
+	{
+		META_OBJECT
 
-public:
-	Application& instance();
-	Application();
-	void exec();
-	void exit();
+	public:
+		Application& instance();
+		Application();
+		void exec();
+		void exit();
 
-private:
-	bool m_shutdown = false;
-	static Application* s_instance;
-};
+	private:
+		bool m_shutdown = false;
+		static Application* s_instance;
+	};
+}

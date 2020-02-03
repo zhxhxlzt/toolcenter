@@ -1,41 +1,30 @@
 #include<iostream>
-#include "Object.h"
-#include "World.h"
+#include <Application.h>
 #include <set>
-
+#include <Window.h>
 using namespace std;
+using namespace yk;
+void run()
+{
+	cout << "run" << endl;
+}
 
-//int main()
-//{
-//	Object o;
-//	o.func1();
-//	o.func2();
-//	cout << o.className() << endl;
-//	cout << o.baseClassName() << endl;
-//
-//	World w;
-//	cout << w.className() << endl;
-//	cout << w.baseClassName() << endl;
-//	getchar();
-//	return 0;
-//}
 int main()
 {
-	set<int> ins = { 1, 5, 34, 2, 9, 0 };
+	Application app;
+	auto t = make_shared<Timer>();
+	t->timeOut += run;
+	t->start(1000);
+	auto window = make_shared<yk::Window>();
+	window->init();
 
-	for (auto it = ins.begin(); it != ins.end();)
+	while (true)
 	{
-		if (*it < 10)
-		{
-			auto last = it++;
-			ins.erase(last);
-		}
-		else
-			it++;
+		window->prepare();
+		window->finish();
 	}
-
-	for (auto &e : ins)
-		cout << e << endl;
+	
+	app.exec();
 	getchar();
 	return 0;
 }

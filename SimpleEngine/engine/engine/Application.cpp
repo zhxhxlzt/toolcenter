@@ -1,6 +1,7 @@
 #include "Application.h"
 #include <Windows.h>
 #include <iostream>
+using namespace yk;
 Application* Application::s_instance = nullptr;
 
 Application& Application::instance()

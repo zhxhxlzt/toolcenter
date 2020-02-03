@@ -6,9 +6,10 @@ import pathlib
 
 root_path = r"E:\Works\git_trunk\toolcenter\SimpleEngine\engine\engine"
 target_dir = r"E:\Works\git_trunk\toolcenter\SimpleEngine\engine\engine\metainfo"
-class_pattern = re.compile("class (?P<className>\w+) *:? *(public (?P<parentName>\w+))?\n{.*META_OBJECT.*}", re.M | re.S)
+class_pattern = re.compile("class (?P<className>\w+) *:? *(public (?P<parentName>\w+))?(, .*?)?\n[ \t]*{.*META_OBJECT.*}", re.M | re.S)
 # 查找所有的.h文件，对于包含了QObject宏的类，初始化它的元对象信息
 meta_info = '''#include "%s"\n\n
+using namespace yk;
 MetaObject %s::s_metaObject = MetaObject{ "%s", "%s", %d, %d};
 '''
 g_classID = 0
@@ -33,6 +34,7 @@ def getMetaCode(fileNameToClassName: dict):
 %s
 
 using namespace std;
+using namespace yk;
 // 元数据字典
 map<string, MetaObject*> MetaObject::metaObjects = {
     %s

@@ -1,5 +1,6 @@
 #include "MetaObject.h"
 
+using namespace yk;
 
 const MetaObject* MetaObject::baseMetaObject()
 {

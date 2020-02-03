@@ -1,4 +1,5 @@
 #include "Transform.h"
 
 
-MetaObject Transform::s_metaObject = MetaObject{ "Transform", "Component", 6, 3};
+using namespace yk;
+MetaObject Transform::s_metaObject = MetaObject{ "Transform", "Component", 9, 3};

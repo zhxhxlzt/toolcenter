@@ -1,4 +1,5 @@
 #include "TimerMgr.h"
+using namespace yk;
 
 TimerMgr* TimerMgr::s_instance = nullptr;
 

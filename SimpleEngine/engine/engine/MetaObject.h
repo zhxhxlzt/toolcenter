@@ -3,18 +3,20 @@
 #include <string>
 #define STD std::
 
-
-struct MetaObject
+namespace yk
 {
-	const STD string className;
-	const STD string baseClassName;
-	const int classID;
-	const int baseClassID;
-	const MetaObject* baseMetaObject();
-	bool inherits(const MetaObject* metaObject);
-	static STD map<STD string, MetaObject*> metaObjects;
-	static MetaObject* getMetaObject(STD string className);
-};
+	struct MetaObject
+	{
+		const STD string className;
+		const STD string baseClassName;
+		const int classID;
+		const int baseClassID;
+		const MetaObject* baseMetaObject();
+		bool inherits(const MetaObject* metaObject);
+		static STD map<STD string, MetaObject*> metaObjects;
+		static MetaObject* getMetaObject(STD string className);
+	};
+}
 
 #define META_OBJECT		\
 public:		\

@@ -1,4 +1,5 @@
 #include "Object.h"
 
 
-MetaObject Object::s_metaObject = MetaObject{ "Object", "", 4, -1};
+using namespace yk;
+MetaObject Object::s_metaObject = MetaObject{ "Object", "", 6, -1};
