@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject Object::s_metaObject = MetaObject{ "Object", "", 6, -1};
+MetaObject Object::s_metaObject = MetaObject{ "Object", "", 7, -1};

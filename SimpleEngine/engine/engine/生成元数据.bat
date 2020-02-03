@@ -1,1 +1,2 @@
 python metainfo.py
+pause

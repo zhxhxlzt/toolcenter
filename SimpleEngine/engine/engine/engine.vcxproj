@@ -25,6 +25,7 @@
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="MetaObject.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Timer.h" />
@@ -37,12 +38,14 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="metainfo\meta_Application.cpp" />
     <ClCompile Include="metainfo\meta_BaseComponent.cpp" />
     <ClCompile Include="metainfo\meta_ClassInfo.cpp" />
     <ClCompile Include="metainfo\meta_Component.cpp" />
     <ClCompile Include="metainfo\meta_GameObject.cpp" />
     <ClCompile Include="metainfo\meta_Input.cpp" />
+    <ClCompile Include="metainfo\meta_Mesh.cpp" />
     <ClCompile Include="metainfo\meta_Object.cpp" />
     <ClCompile Include="metainfo\meta_Timer.cpp" />
     <ClCompile Include="metainfo\meta_TimerMgr.cpp" />
@@ -54,6 +57,9 @@
     <ClCompile Include="TimerMgr.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="源.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="metainfo.py" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

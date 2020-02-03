@@ -3,9 +3,13 @@
 
 import re
 import pathlib
+import sys
+import os
 
-root_path = r"E:\Works\git_trunk\toolcenter\SimpleEngine\engine\engine"
-target_dir = r"E:\Works\git_trunk\toolcenter\SimpleEngine\engine\engine\metainfo"
+#root_path = r"E:\Works\git_trunk\toolcenter\SimpleEngine\engine\engine"
+root_path = os.path.abspath(os.curdir)
+#target_dir = r"E:\Works\git_trunk\toolcenter\SimpleEngine\engine\engine\metainfo"
+target_dir = os.path.join(root_path, "metainfo")
 class_pattern = re.compile("class (?P<className>\w+) *:? *(public (?P<parentName>\w+))?(, .*?)?\n[ \t]*{.*META_OBJECT.*}", re.M | re.S)
 # 查找所有的.h文件，对于包含了QObject宏的类，初始化它的元对象信息
 meta_info = '''#include "%s"\n\n
@@ -17,7 +21,6 @@ def getClassID():
     global g_classID
     g_classID += 1
     return g_classID
-
 
 def getMetaCode(fileNameToClassName: dict):
     code = '''\
@@ -78,6 +81,8 @@ if __name__ == '__main__':
                 # filePath = target_path / fileName
                 # with open(filePath, "w") as metaFile:
                 #     metaFile.write(info)
+            else:
+                print("没有检测到META_OBJECT :", e.as_posix())
 
     for fileName, childName in fileNameToClassName.items():
         childID = classNameToID[childName]
@@ -88,6 +93,7 @@ if __name__ == '__main__':
         filePath = target_path / ("meta_" + fileNameCpp)
         with open(filePath, "w") as metaFile:
             metaFile.write(info)
+            print(f"正在生成元数据： {childName}")
     code = getMetaCode(fileNameToClassName)
     with open(target_path / "meta_ClassInfo.cpp", "w") as fp:
         fp.write(code)

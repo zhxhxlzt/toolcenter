@@ -79,6 +79,10 @@
     <ClCompile Include="metainfo\meta_Window.cpp">
       <Filter>meta</Filter>
     </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_Mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -117,5 +121,11 @@
     <ClInclude Include="Input.h">
       <Filter>io</Filter>
     </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>render</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="metainfo.py" />
   </ItemGroup>
 </Project>

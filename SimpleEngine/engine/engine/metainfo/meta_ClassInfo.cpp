@@ -13,6 +13,7 @@
 #include "Component.h"
 #include "GameObject.h"
 #include "Input.h"
+#include "Mesh.h"
 #include "Object.h"
 #include "Timer.h"
 #include "TimerMgr.h"
@@ -28,6 +29,7 @@ map<string, MetaObject*> MetaObject::metaObjects = {
 	pair<string, MetaObject*>("Component", &Component::s_metaObject),
 	pair<string, MetaObject*>("GameObject", &GameObject::s_metaObject),
 	pair<string, MetaObject*>("Input", &Input::s_metaObject),
+	pair<string, MetaObject*>("Mesh", &Mesh::s_metaObject),
 	pair<string, MetaObject*>("Object", &Object::s_metaObject),
 	pair<string, MetaObject*>("Timer", &Timer::s_metaObject),
 	pair<string, MetaObject*>("TimerMgr", &TimerMgr::s_metaObject),

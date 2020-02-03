@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject Input::s_metaObject = MetaObject{ "Input", "Object", 5, 6};
+MetaObject Input::s_metaObject = MetaObject{ "Input", "Object", 5, 7};
