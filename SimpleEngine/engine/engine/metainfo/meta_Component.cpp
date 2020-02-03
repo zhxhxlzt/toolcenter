@@ -1,4 +1,4 @@
 #include "Component.h"
 
 
-MetaObject Component::metaObject = MetaObject{ "Component", "BaseComponent", 2, 1};
+MetaObject Component::s_metaObject = MetaObject{ "Component", "BaseComponent", 2, 1};

@@ -1,4 +1,4 @@
 #include "GameObject.h"
 
 
-MetaObject GameObject::metaObject = MetaObject{ "GameObject", "Object", 4, -1};
+MetaObject GameObject::s_metaObject = MetaObject{ "GameObject", "Object", 3, -1};

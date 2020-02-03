@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Object.h"
-
 class GameObject;
 class BaseComponent : public Object
 {

@@ -12,8 +12,5 @@
 class Object
 {
 	META_OBJECT
-public:
-	Object();
-	~Object();
 };
 

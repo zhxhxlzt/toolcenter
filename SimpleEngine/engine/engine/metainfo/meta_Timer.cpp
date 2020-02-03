@@ -1,4 +1,4 @@
 #include "Timer.h"
 
 
-MetaObject Timer::metaObject = MetaObject{ "Timer", "Object", 6, 5};
+MetaObject Timer::s_metaObject = MetaObject{ "Timer", "Object", 4, 3};

@@ -18,9 +18,12 @@ struct MetaObject
 
 #define META_OBJECT		\
 public:		\
-	static MetaObject metaObject;	\
-	virtual MetaObject* getMetaObject() { return &metaObject; }	\
-	virtual STD string className(){ return metaObject.className;}	\
-	virtual STD string baseClassName() {return metaObject.baseClassName; }	\
-	virtual int classID() { return metaObject.classID; }	\
-	virtual int baseClassID() { return metaObject.baseClassID; }
+	friend struct MetaObject;	\
+	static MetaObject* metaObject(){ return &s_metaObject; }	\
+	virtual MetaObject* getMetaObject() { return &s_metaObject; }	\
+	virtual STD string className(){ return s_metaObject.className;}	\
+	virtual STD string baseClassName() {return s_metaObject.baseClassName; }	\
+	virtual int classID() { return s_metaObject.classID; }	\
+	virtual int baseClassID() { return s_metaObject.baseClassID; }	\
+private:	\
+	static MetaObject s_metaObject;	\

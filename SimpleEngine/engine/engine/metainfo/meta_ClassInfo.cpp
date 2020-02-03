@@ -10,8 +10,6 @@
 // 包含头文件
 #include "BaseComponent.h"
 #include "Component.h"
-#include "Delegate.h"
-#include "GameObject.h"
 #include "Object.h"
 #include "Timer.h"
 #include "Transform.h"
@@ -20,11 +18,10 @@
 using namespace std;
 // 元数据字典
 map<string, MetaObject*> MetaObject::metaObjects = {
-    pair<string, MetaObject*>("BaseComponent", &BaseComponent::metaObject),
-	pair<string, MetaObject*>("Component", &Component::metaObject),
-	pair<string, MetaObject*>("GameObject", &GameObject::metaObject),
-	pair<string, MetaObject*>("Object", &Object::metaObject),
-	pair<string, MetaObject*>("Timer", &Timer::metaObject),
-	pair<string, MetaObject*>("Transform", &Transform::metaObject),
-	pair<string, MetaObject*>("World", &World::metaObject)
+    pair<string, MetaObject*>("BaseComponent", &BaseComponent::s_metaObject),
+	pair<string, MetaObject*>("Component", &Component::s_metaObject),
+	pair<string, MetaObject*>("Object", &Object::s_metaObject),
+	pair<string, MetaObject*>("Timer", &Timer::s_metaObject),
+	pair<string, MetaObject*>("Transform", &Transform::s_metaObject),
+	pair<string, MetaObject*>("World", &World::s_metaObject)
 };

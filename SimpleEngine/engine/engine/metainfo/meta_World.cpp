@@ -1,4 +1,4 @@
 #include "World.h"
 
 
-MetaObject World::metaObject = MetaObject{ "World", "Object", 8, 5};
+MetaObject World::s_metaObject = MetaObject{ "World", "Object", 6, 3};

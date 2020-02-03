@@ -6,10 +6,10 @@ import pathlib
 
 root_path = r"E:\Works\git_trunk\toolcenter\SimpleEngine\engine\engine"
 target_dir = r"E:\Works\git_trunk\toolcenter\SimpleEngine\engine\engine\metainfo"
-class_pattern = re.compile("class (?P<className>\w+) *:? *(public (?P<parentName>\w+))?.*{.*META_OBJECT.*}", re.M | re.S)
+class_pattern = re.compile("class (?P<className>\w+) *:? *(public (?P<parentName>\w+))?\n{.*META_OBJECT.*}", re.M | re.S)
 # 查找所有的.h文件，对于包含了QObject宏的类，初始化它的元对象信息
 meta_info = '''#include "%s"\n\n
-MetaObject %s::metaObject = MetaObject{ "%s", "%s", %d, %d};
+MetaObject %s::s_metaObject = MetaObject{ "%s", "%s", %d, %d};
 '''
 g_classID = 0
 def getClassID():
@@ -42,7 +42,7 @@ map<string, MetaObject*> MetaObject::metaObjects = {
     for fileName, className in fileNameToClassName.items():
         include = f'#include "{fileName}"'
         includes.append(include)
-        item = f'pair<string, MetaObject*>("{className}", &{className}::metaObject)'
+        item = f'pair<string, MetaObject*>("{className}", &{className}::s_metaObject)'
         items.append(item)
     include_code = "\n".join(includes)
     item_code = ",\n\t".join(items)

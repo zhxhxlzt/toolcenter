@@ -18,12 +18,12 @@ public:
 	template<class T>
 	STD shared_ptr<T> getComponent()
 	{
-		auto meta = T::getMetaObject();
+		auto meta = T::metaObject();
 		for (auto &comp_ptr : m_components)
 		{
 			auto comp_meta = comp_ptr->getMetaObject();
-			if (comp_meta.inherits(meta))
-				return comp_ptr;
+			if (comp_meta == meta || comp_meta->inherits(meta))
+				return STD static_pointer_cast<T>(comp_ptr);
 		}
 		return nullptr;
 	}

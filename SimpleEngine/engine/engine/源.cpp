@@ -36,30 +36,11 @@ void f3()
 	cout << "f3" << endl;
 }
 
-void testset()
-{
-	set<int> s = { 3, 9, 4, 2, 8 };
-	for (auto e : s)
-	{
-		cout << e << endl;
-	}
-}
-
-
 int main()
 {
-	Delegate<> D1;
-	D1 += f1;
-	D1 += f2;
-	D1 += f3;
-	D1();
-	cout << "======Ê¹ÓÃD2()" << endl;
-	Delegate<> D2;
-	D2 += D1;
-	D2();
-	D2 -= D1;
-	cout << "======D2 -= D1ºó" << endl;
-	D2();
+	auto gb = make_shared<GameObject>();
+	gb->addComponent<Transform>();
+	auto tr = gb->getComponent<BaseComponent>();
 	getchar();
 	return 0;
 }
