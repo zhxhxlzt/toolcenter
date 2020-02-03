@@ -1,7 +1,6 @@
 #include "Timer.h"
 #include "TimerMgr.h"
-#include <iostream>
-using namespace std;
+
 static size_t timerID = 0;
 
 void Timer::start(size_t interval, bool singleShoot)

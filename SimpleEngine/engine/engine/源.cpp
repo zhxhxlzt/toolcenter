@@ -26,40 +26,25 @@ void showClassInfo(Object* o)
 void run()
 {
 	static int i = 0;
-	//cout << "runing" << i++ << endl;
-	auto t = make_shared<Timer>();
-	t->timeOut += [&]() { cout << "hello" << i++ << endl; };
-	t->start(i * 500, true);
+	cout << "runing" << i++ << endl;
 }
-
-struct A : enable_shared_from_this<A>
+static auto point = system_clock::now();
+void showTime(string s)
 {
-public:
-	shared_ptr<A> get()
-	{
-		return shared_from_this();
-	}
-};
-
-class B : public enable_shared_from_this<B>
-{
-public:
-	shared_ptr<B> get()
-	{
-		return shared_from_this();
-	}
-};
-
-
+	auto d = system_clock::now() - point;
+	cout << s << "time:" << duration_cast<chrono::milliseconds>(d).count() << endl;
+}
 int main()
 {
 	Application app;
-	auto t = make_shared<Timer>();
-	t->timeOut += run;
-	t->start(100);
-	auto t1 = make_shared<Timer>();
-	t1->timeOut += [&]() { t->stop(); };
-	t1->start(1000);
+	//vector<shared_ptr<Timer>> timers;
+	for (int i = 0; i < 100; i++)
+	{
+		auto t = make_shared<Timer>();
+		t->timeOut += run;
+		t->start(i * 100, true);
+	}
+
 	app.exec();
 	getchar();
 	return 0;

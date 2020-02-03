@@ -55,7 +55,9 @@
     <ClCompile Include="TimerMgr.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="metainfo\meta_TimerMgr.cpp" />
+    <ClCompile Include="metainfo\meta_TimerMgr.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">

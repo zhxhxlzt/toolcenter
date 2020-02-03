@@ -14,10 +14,6 @@ public:
 	void setSingleShoot(bool singleShoot);
 	time_point<system_clock>& getExpireTime();
 	bool operator<(const Timer& right) const;
-	auto get()
-	{
-		return shared_from_this();
-	}
 
 private:
 	void resetExpireTime();
