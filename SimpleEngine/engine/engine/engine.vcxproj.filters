@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{cc8cca4e-fbf0-4cd9-b4d4-1a3a094d6374}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thirdparty">
+      <UniqueIdentifier>{f3b1bb03-1cd3-48a4-90cd-83c39d94d86e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="meta">
+      <UniqueIdentifier>{7173abc1-f27c-49e0-a9f3-e1b49c21f6d1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Object.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="源.cpp" />
+    <ClCompile Include="MetaObject.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_BaseComponent.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_ClassInfo.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_Component.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_GameObject.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_Object.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_Timer.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_Transform.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_World.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Object.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="MetaObject.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseComponent.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Delegate.h">
+      <Filter>core</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
