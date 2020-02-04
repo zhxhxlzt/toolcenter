@@ -18,6 +18,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 using namespace glm;
+template<typename T>
+using SharedPtr = STD shared_ptr<T>;
+template<typename T>
+using Vector = STD vector<T>;
 namespace yk
 {
 	class Object : public STD enable_shared_from_this<Object>
@@ -62,6 +66,12 @@ inline STD ostream& operator<< (STD ostream& s, glm::quat v)
 
 inline STD ostream& operator<< (STD ostream& s, glm::mat4 m)
 {
-	s << "[[" << m[0] << "][" << m[1] << "][" << m[2] << "][" << m[3] << "]]" << endl;
+	s << "[[" << m[0] << "][" << m[1] << "][" << m[2] << "][" << m[3] << "]]" << STD endl;
 	return s;
+}
+
+template<typename T>
+inline Vector<T>& operator+=(Vector<T>& left, Vector<T>& right)
+{
+	left.insert(left.end(), right.begin(), right.end());
 }

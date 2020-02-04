@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject Application::s_metaObject = MetaObject{ "Application", "Object", 1, 8};
+MetaObject Application::s_metaObject = MetaObject{ "Application", "Object", 1, 12};

@@ -82,8 +82,48 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>render</Filter>
     </ClCompile>
-    <ClCompile Include="metainfo\meta_Mesh.cpp" />
-    <ClCompile Include="metainfo\meta_Behaviour.cpp" />
+    <ClCompile Include="Renderer.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_Behaviour.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_Mesh.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_MeshRenderer.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_Renderer.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderMgr.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMgr.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_Camera.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_MonoBehaviour.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshRenderer.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_MeshFilter.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMgr.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -125,11 +165,53 @@
     <ClInclude Include="Mesh.h">
       <Filter>render</Filter>
     </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>render</Filter>
+    </ClInclude>
     <ClInclude Include="Behaviour.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderer.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderMgr.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMgr.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="MonoBehaviour.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMgr.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptMgr.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="ykEngine.h" />
+    <ClInclude Include="MeshFilter.h">
       <Filter>render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="metainfo.py" />
+    <None Include="shaders\diffuse.vert" />
+    <None Include="shaders\diffuse.frag" />
   </ItemGroup>
 </Project>

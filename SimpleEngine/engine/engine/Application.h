@@ -2,6 +2,7 @@
 #include "Object.h"
 #include <assert.h>
 #include "TimerMgr.h"
+#include "Window.h"
 
 namespace yk
 {
@@ -10,7 +11,7 @@ namespace yk
 		META_OBJECT
 
 	public:
-		Application& instance();
+		static Application& instance();
 		Application();
 		void exec();
 		void exit();

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "BaseComponent.h"
-#include "GameObject.h"
 namespace yk
 {
 	class Component : public BaseComponent
@@ -9,7 +8,7 @@ namespace yk
 		META_OBJECT
 	public:
 		Component() : BaseComponent() {}
-		template<class T>
+		/*template<class T>
 		STD shared_ptr<T> addComponent()
 		{
 			return gameObject()->addComponent<T>();
@@ -19,6 +18,6 @@ namespace yk
 		STD shared_ptr<T> getComponent()
 		{
 			return gameObject()->getComponent<T>();
-		}
+		}*/
 	};
 }

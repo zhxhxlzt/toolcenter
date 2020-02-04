@@ -8,6 +8,7 @@ void Timer::start(size_t interval, bool singleShoot)
 {
 	auto p = shared_from_this();
 	TimerMgr::instance().delTimer(shared_from_this());
+	m_active = true;
 	m_singleShoot = singleShoot;
 	m_interval = milliseconds(interval);
 	m_timerID = timerID++;
@@ -17,11 +18,15 @@ void Timer::start(size_t interval, bool singleShoot)
 
 void Timer::stop()
 {
-	TimerMgr::instance().delTimer(shared_from_this());
+	m_active = false;
 }
 
 void Timer::call()
 {
+	if (!m_active)
+	{
+		return;
+	}
 	timeOut();
 	if (!m_singleShoot)
 	{

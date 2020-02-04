@@ -1,7 +1,10 @@
 #pragma once
 #include "Object.h"
 #include "BaseComponent.h"
+#include "SceneMgr.h"
 #include <assert.h>
+#include <Renderer.h>
+#include <queue>
 namespace yk
 {
 	class Transform;
@@ -10,6 +13,8 @@ namespace yk
 		META_OBJECT
 	public:
 		GameObject();
+		~GameObject();
+		static SharedPtr<GameObject> create();
 		template<class T>
 		STD shared_ptr<T> addComponent()
 		{
@@ -29,13 +34,45 @@ namespace yk
 			return nullptr;
 		}
 
+		template<class T>
+		STD vector<STD shared_ptr<T>> getComponents()
+		{
+			STD vector<STD shared_ptr<T>> comps;
+			auto meta = T::metaObject();
+			for (auto& comp_ptr : m_components)
+			{
+				auto comp_meta = comp_ptr->getMetaObject();
+				if (comp_meta == meta || comp_meta->inherits(meta))
+					comps.push_back(STD static_pointer_cast<T>(comp_ptr));
+			}
+			return comps;
+		}
+
+		template<class T>
+		STD vector<STD shared_ptr<T>> getComponentsInChildren()
+		{
+			STD vector<STD shared_ptr<T>> comps;
+			for (auto obj : children())
+			{
+				if (obj->getMetaObject() == GameObject::metaObject())
+				{
+					auto gb = STD static_pointer_cast<GameObject>(obj);
+					auto gb_comps = gb->getComponents<T>();
+					comps.insert(comps.end(), gb_comps.begin(), gb_comps.end());
+					auto gb_child_comps = gb->getComponentsInChildren<T>();
+					comps.insert(comps.end(), gb_child_comps.begin(), gb_child_comps.end());
+					//comps.insert(comps.end(), childComps.begin(), childComps.end());
+				}
+			}
+			return comps;
+		}
+
 		STD shared_ptr<Transform> transform();
+		bool active = true;
 	private:
 		template<class T>
 		STD shared_ptr<T> _addComponent(STD true_type)
 		{
-			auto meta = T::metaObject();
-			assert(meta->inherits(BaseComponent::metaObject()));
 			auto comp_ptr = STD make_shared<T>();
 			comp_ptr->m_gameObject = STD static_pointer_cast<GameObject>(shared_from_this());
 			comp_ptr->m_transform = m_transform;

@@ -22,13 +22,27 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="Behaviour.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Delegate.h" />
+    <ClInclude Include="GameMgr.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="MetaObject.h" />
+    <ClInclude Include="MonoBehaviour.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RenderMgr.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneMgr.h" />
+    <ClInclude Include="ScriptMgr.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="MeshFilter.h" />
+    <ClInclude Include="ykEngine.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TimerMgr.h" />
     <ClInclude Include="Transform.h" />
@@ -36,32 +50,46 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="GameMgr.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="metainfo\meta_Application.cpp" />
     <ClCompile Include="metainfo\meta_BaseComponent.cpp" />
     <ClCompile Include="metainfo\meta_Behaviour.cpp" />
+    <ClCompile Include="metainfo\meta_Camera.cpp" />
     <ClCompile Include="metainfo\meta_ClassInfo.cpp" />
     <ClCompile Include="metainfo\meta_Component.cpp" />
     <ClCompile Include="metainfo\meta_GameObject.cpp" />
     <ClCompile Include="metainfo\meta_Input.cpp" />
     <ClCompile Include="metainfo\meta_Mesh.cpp" />
+    <ClCompile Include="metainfo\meta_MeshFilter.cpp" />
+    <ClCompile Include="metainfo\meta_MeshRenderer.cpp" />
+    <ClCompile Include="metainfo\meta_MonoBehaviour.cpp" />
     <ClCompile Include="metainfo\meta_Object.cpp" />
+    <ClCompile Include="metainfo\meta_Renderer.cpp" />
     <ClCompile Include="metainfo\meta_Timer.cpp" />
     <ClCompile Include="metainfo\meta_TimerMgr.cpp" />
     <ClCompile Include="metainfo\meta_Transform.cpp" />
     <ClCompile Include="metainfo\meta_Window.cpp" />
     <ClCompile Include="MetaObject.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RenderMgr.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneMgr.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TimerMgr.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="源.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="metainfo.py" />
+    <None Include="shaders\diffuse.frag" />
+    <None Include="shaders\diffuse.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

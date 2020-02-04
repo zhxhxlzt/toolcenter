@@ -36,3 +36,21 @@
 //	app.exec();
 //	return 0;
 //}
+
+class A
+{
+public:
+	void f(){ }
+};
+
+class B : public A	
+{
+public:
+	void g() { f(); }
+};
+
+class C : public B	
+{
+public:
+	void h() { f(); }
+};

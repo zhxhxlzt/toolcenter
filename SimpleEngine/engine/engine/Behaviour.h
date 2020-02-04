@@ -8,5 +8,6 @@ namespace yk
 		META_OBJECT
 	public:
 		Behaviour() : Component() {}
+		bool enabled = true;
 	};
 }
