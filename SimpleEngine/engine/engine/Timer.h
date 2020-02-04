@@ -5,7 +5,7 @@
 namespace yk
 {
 	using namespace std::chrono;
-	class Timer : public Object, public STD enable_shared_from_this<Timer>
+	class Timer : public Object
 	{
 		META_OBJECT
 	public:
@@ -16,6 +16,7 @@ namespace yk
 		void setSingleShoot(bool singleShoot);
 		time_point<system_clock>& getExpireTime();
 		bool operator<(const Timer& right) const;
+		STD shared_ptr<Timer> shared_from_this();
 
 	private:
 		void resetExpireTime();

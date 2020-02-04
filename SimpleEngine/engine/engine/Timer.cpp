@@ -50,3 +50,8 @@ void Timer::resetExpireTime()
 	m_startPoint = system_clock::now();
 	m_expirePoint = m_startPoint + m_interval;
 }
+
+STD shared_ptr<Timer> Timer::shared_from_this()
+{
+	return STD static_pointer_cast<Timer>(Object::shared_from_this());
+}

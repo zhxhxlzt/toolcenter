@@ -4,6 +4,7 @@
 #include <Window.h>
 #include <string>
 #include <vector>
+#include <GameObject.h>
 using namespace std;
 using namespace yk;
 
@@ -35,8 +36,16 @@ int main()
 	dele2 += say;
 	dele2("lyq");
 	dele2 -= say;*/
-
-	vector<A> vec;
+	auto o1 = make_shared<Object>();
+	o1->name = "abc";
+	auto o2 = make_shared<Object>();
+	o2->name = "def";
+	o2->setParent(o1);
+	auto c = o1->children();
+	auto f = o1->findChild("def");
+	//auto gb = make_shared<GameObject>();
+	//gb->addComponent<Object>();
+	/*vector<A> vec;
 	auto a = A();
 	vec.push_back(a);
 	vec.push_back(a);
@@ -46,7 +55,7 @@ int main()
 	for_each(vec.begin(), vec.end(), [](auto v) {});
 
 	cout << "test ref ====" << endl;
-	for_each(vec.begin(), vec.end(), [](auto& v) {});
+	for_each(vec.begin(), vec.end(), [](auto& v) {});*/
 	
 	getchar();
 	return 0;

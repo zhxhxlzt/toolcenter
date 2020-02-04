@@ -10,7 +10,14 @@ import os
 root_path = os.path.abspath(os.curdir)
 #target_dir = r"E:\Works\git_trunk\toolcenter\SimpleEngine\engine\engine\metainfo"
 target_dir = os.path.join(root_path, "metainfo")
-class_pattern = re.compile("class (?P<className>\w+) *:? *(public (?P<parentName>\w+))?(, .*?)?\n[ \t]*{.*META_OBJECT.*}", re.M | re.S)
+
+# 识别类名与继承关系
+access_control_re = "(public|private|protected)"
+class_name_re = "\w+"
+# class_pattern = re.compile(f"class (?P<className>\w+) *:? *(public (?P<parentName>\w+))?(, .*?)?\n[ \t]*{.*META_OBJECT.*}", re.M | re.S)
+class_no_parent_pattern = re.compile("class (?P<className>\w+)\n(?=.*META_OBJECT)")
+class_parent_pattern = re.compile(f"class (?P<className>\w+) : {access_control_re} (?P<parentName>(\w|<|>| )+)\n")
+
 # 查找所有的.h文件，对于包含了QObject宏的类，初始化它的元对象信息
 meta_info = '''#include "%s"\n\n
 using namespace yk;
@@ -54,7 +61,6 @@ map<string, MetaObject*> MetaObject::metaObjects = {
     code %= (include_code, item_code)
     return code
 
-
 if __name__ == '__main__':
     classNameToID = {}
     fileNameToClassName = {}
@@ -67,22 +73,22 @@ if __name__ == '__main__':
     for e in root.rglob("*.h"):
         with open(e) as fp:
             code = fp.read()
-            res = class_pattern.search(code)
-            if res:
-                className = res.group('className')
-                fileNameToClassName[e.name] = className
-                classID = getClassID()
-                classNameToID[className] = classID
-                parentName = res.group('parentName') or ""
-                childToParent[className] = parentName
-                # parentID = classNameToID.get(parentName, -1)
-                # info = meta_info % (e.name, className, className, parentName, classID, parentID)
-                # fileName = f"meta_{e.stem}.cpp"
-                # filePath = target_path / fileName
-                # with open(filePath, "w") as metaFile:
-                #     metaFile.write(info)
-            else:
+            if not "META_OBJECT" in code:
+                continue
+            res = class_parent_pattern.search(code)
+            if not res:
+                res = class_no_parent_pattern.search(code)
+
+            if not res:
                 print("没有检测到META_OBJECT :", e.as_posix())
+                continue
+
+            className = res.group('className')
+            fileNameToClassName[e.name] = className
+            classID = getClassID()
+            classNameToID[className] = classID
+            parentName = res.group('parentName') or ""
+            childToParent[className] = parentName
 
     for fileName, childName in fileNameToClassName.items():
         childID = classNameToID[childName]

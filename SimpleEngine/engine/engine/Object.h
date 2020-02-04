@@ -18,8 +18,24 @@
 
 namespace yk
 {
-	class Object
+	class Object : public STD enable_shared_from_this<Object>
 	{
 		META_OBJECT
+	public:
+		Object();
+		STD string name = "";
+		int getInstanceID();
+		virtual STD string toString();
+		void setParent(STD shared_ptr<Object> parent);
+		STD vector<STD shared_ptr<Object>> children();
+		STD shared_ptr<Object> findChild(STD string&& name);
+		STD shared_ptr<Object> findChild(STD string& name);
+		operator bool() const;
+
+	private:
+		bool m_alive = true;
+		int m_instanceID = -1;
+		STD weak_ptr<Object> m_parent;
+		STD vector<STD shared_ptr<Object>> m_children;
 	};
 }
