@@ -5,6 +5,9 @@
 #include <string>
 #include <vector>
 #include <GameObject.h>
+#include <Mesh.h>
+#include <Transform.h>
+#include <Behaviour.h>
 using namespace std;
 using namespace yk;
 
@@ -27,36 +30,9 @@ public:
 };
 int main()
 {
-	/*Delegate<int> dele;
-	dele += run;
-	dele(20);
-	dele -= run;
-
-	Delegate<string> dele2;
-	dele2 += say;
-	dele2("lyq");
-	dele2 -= say;*/
-	auto o1 = make_shared<Object>();
-	o1->name = "abc";
-	auto o2 = make_shared<Object>();
-	o2->name = "def";
-	o2->setParent(o1);
-	auto c = o1->children();
-	auto f = o1->findChild("def");
-	//auto gb = make_shared<GameObject>();
-	//gb->addComponent<Object>();
-	/*vector<A> vec;
-	auto a = A();
-	vec.push_back(a);
-	vec.push_back(a);
-	vec.push_back(a);
-
-	cout << "test copy ===" << endl;
-	for_each(vec.begin(), vec.end(), [](auto v) {});
-
-	cout << "test ref ====" << endl;
-	for_each(vec.begin(), vec.end(), [](auto& v) {});*/
-	
+	auto gb = make_shared<GameObject>();
+	auto ms = gb->addComponent<Behaviour>();
+	auto tr = ms->transform();
 	getchar();
 	return 0;
 }

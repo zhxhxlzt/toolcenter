@@ -83,6 +83,7 @@
       <Filter>render</Filter>
     </ClCompile>
     <ClCompile Include="metainfo\meta_Mesh.cpp" />
+    <ClCompile Include="metainfo\meta_Behaviour.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -122,6 +123,9 @@
       <Filter>io</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour.h">
       <Filter>render</Filter>
     </ClInclude>
   </ItemGroup>

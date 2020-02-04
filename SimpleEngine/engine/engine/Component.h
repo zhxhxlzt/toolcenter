@@ -8,6 +8,7 @@ namespace yk
 	{
 		META_OBJECT
 	public:
+		Component() : BaseComponent() {}
 		template<class T>
 		STD shared_ptr<T> addComponent()
 		{

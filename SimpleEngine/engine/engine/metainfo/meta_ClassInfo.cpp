@@ -10,6 +10,7 @@
 // 包含头文件
 #include "Application.h"
 #include "BaseComponent.h"
+#include "Behaviour.h"
 #include "Component.h"
 #include "GameObject.h"
 #include "Input.h"
@@ -26,6 +27,7 @@ using namespace yk;
 map<string, MetaObject*> MetaObject::metaObjects = {
     pair<string, MetaObject*>("Application", &Application::s_metaObject),
 	pair<string, MetaObject*>("BaseComponent", &BaseComponent::s_metaObject),
+	pair<string, MetaObject*>("Behaviour", &Behaviour::s_metaObject),
 	pair<string, MetaObject*>("Component", &Component::s_metaObject),
 	pair<string, MetaObject*>("GameObject", &GameObject::s_metaObject),
 	pair<string, MetaObject*>("Input", &Input::s_metaObject),

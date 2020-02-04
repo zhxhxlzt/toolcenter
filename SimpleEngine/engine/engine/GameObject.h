@@ -4,10 +4,12 @@
 #include <assert.h>
 namespace yk
 {
+	class Transform;
 	class GameObject : public Object
 	{
 		META_OBJECT
 	public:
+		GameObject();
 		template<class T>
 		STD shared_ptr<T> addComponent()
 		{
@@ -27,6 +29,7 @@ namespace yk
 			return nullptr;
 		}
 
+		STD shared_ptr<Transform> transform();
 	private:
 		template<class T>
 		STD shared_ptr<T> _addComponent(STD true_type)
@@ -35,6 +38,7 @@ namespace yk
 			assert(meta->inherits(BaseComponent::metaObject()));
 			auto comp_ptr = STD make_shared<T>();
 			comp_ptr->m_gameObject = STD static_pointer_cast<GameObject>(shared_from_this());
+			comp_ptr->m_transform = m_transform;
 			m_components.push_back(comp_ptr);
 			return comp_ptr;
 		}
@@ -44,5 +48,6 @@ namespace yk
 			return nullptr; 
 		}
 		STD vector<STD shared_ptr<BaseComponent>> m_components;
+		STD shared_ptr<Transform> m_transform;
 	};
 }
