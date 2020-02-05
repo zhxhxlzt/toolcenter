@@ -15,13 +15,13 @@ namespace yk
 			cout << "moving" << dir << "--";
 		}
 
-		virtual void Awake()
+		void Awake() override
 		{
 			//glfwSetInputMode(&(*RenderMgr::window()), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 			//RenderMgr::window()->SetCursorEnable(false);
 		}
 
-		virtual void Update()
+		void Update() override
 		{
 			if (Input::getkey(GLFW_KEY_A) || Input::getkeydown(GLFW_KEY_A))
 			{
@@ -66,7 +66,7 @@ namespace yk
 				transform()->position() += 0.1f * transform()->up();
 			}
 
-			if (Input::getkey(GLFW_MOUSE_BUTTON_1))
+			if (Input::getkey(GLFW_MOUSE_BUTTON_2))
 			{
 				float angleX = Input::getCursorDeltaX();
 				float angleY = Input::getCursorDeltaY();
@@ -111,16 +111,16 @@ namespace yk
 				cout << "factor: " << factor << endl;
 			}
 
-			if (Input::getkeydown(GLFW_MOUSE_BUTTON_1))
-			{
-				RenderMgr::window()->SetCursorEnable(false);
-			}
+			//if (Input::getkeydown(GLFW_MOUSE_BUTTON_2))
+			//{
+			//	RenderMgr::window()->SetCursorEnable(false);
+			//}
 
-			if (Input::getkeyup(GLFW_MOUSE_BUTTON_1))
-			{
-				//cout << "mouse released!" << endl;
-				RenderMgr::window()->SetCursorEnable(true);
-			}
+			//if (Input::getkeyup(GLFW_MOUSE_BUTTON_2))
+			//{
+			//	//cout << "mouse released!" << endl;
+			//	RenderMgr::window()->SetCursorEnable(true);
+			//}
 
 			if (Input::getkeydown(GLFW_KEY_ENTER))
 			{

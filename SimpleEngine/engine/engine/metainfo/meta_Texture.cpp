@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject Texture::s_metaObject = MetaObject{ "Texture", "Object", 14, 12};
+MetaObject Texture::s_metaObject = MetaObject{ "Texture", "Object", 16, 14};

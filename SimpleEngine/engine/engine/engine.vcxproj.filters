@@ -144,6 +144,8 @@
     <ClCompile Include="Component.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="metainfo\meta_CubeMove.cpp" />
+    <ClCompile Include="metainfo\meta_AlwaysLootAt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -239,6 +241,12 @@
     </ClInclude>
     <ClInclude Include="GraphicDebug.h" />
     <ClInclude Include="CamMoveCtrl.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeMove.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="AlwaysLootAt.h">
       <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>

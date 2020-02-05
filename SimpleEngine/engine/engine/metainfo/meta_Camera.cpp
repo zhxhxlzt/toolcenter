@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject Camera::s_metaObject = MetaObject{ "Camera", "Behaviour", 3, 2};
+MetaObject Camera::s_metaObject = MetaObject{ "Camera", "Behaviour", 4, 3};

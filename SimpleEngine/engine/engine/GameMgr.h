@@ -20,6 +20,7 @@ namespace yk
 			ScriptMgr::update();
 			// äÖÈ¾¸üÐÂ
 			RenderMgr::rendering();
+			ScriptMgr::LateUpdate();
 		}
 		static void exit() {
 			m_gameUpdate->timeOut -= update;

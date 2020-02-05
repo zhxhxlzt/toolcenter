@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject Mesh::s_metaObject = MetaObject{ "Mesh", "Object", 8, 12};
+MetaObject Mesh::s_metaObject = MetaObject{ "Mesh", "Object", 10, 14};

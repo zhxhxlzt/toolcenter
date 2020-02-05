@@ -21,6 +21,18 @@ namespace yk
 				mb->Update();
 			}
 		}
+		static void LateUpdate()
+		{
+			for (auto& mb : m_newMonoBehaviours)
+				mb->Start();
+			m_newMonoBehaviours.clear();
+
+			auto scene = SceneMgr::getCurrentScene();
+			for (auto& mb : scene->getMonoBehaviours())
+			{
+				mb->LateUpdate();
+			}
+		}
 
 	private:
 		static SharedPtrVector<MonoBehaviour> m_newMonoBehaviours;

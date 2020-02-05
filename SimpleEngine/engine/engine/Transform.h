@@ -3,6 +3,7 @@
 #include "Component.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
 using namespace std;
 namespace yk
 {
@@ -15,23 +16,17 @@ namespace yk
 		// 本地空间
 		vec3 m_position;
 		vec3 m_scale;
-		vec3 m_forward;
-		vec3 m_right;
-		vec3 m_up;
 		qua<float> m_rotation;
 
-		static const vec4 zero;
-		static const vec4 sforward;
-		static const vec4 sright;
-		static const vec4 sup;
+		static const vec3 zero;
+		static const vec3 sforward;
+		static const vec3 sright;
+		static const vec3 sup;
 
 	public:
 		Transform() : Component(),
 			m_position(vec3(.0f, .0f, .0f)),
-			m_scale(vec3(1.0f, 1, 1)),
-			m_forward(vec3(0, 0, -1.0f)),
-			m_right(vec3(1.0f, 0, 0)),
-			m_up(vec3(0, 1.0f, 0))
+			m_scale(vec3(1.0f, 1, 1))
 		{
 			m_rotation = qua<float>(mat4(1));
 		}
@@ -57,23 +52,53 @@ namespace yk
 		void setRotation(qua<float>& rot)
 		{
 			m_rotation = rot;
-			mat4 mtx = mat4_cast(rot);
-			m_forward = mtx * sforward;
-			m_up = mtx * sup;
-			m_right = mtx * sright;
 		}
 
 		void LookAt(vec3 targetPos)
 		{
-			auto mat = glm::lookAt(m_position, targetPos, m_up);
-			m_forward = mat * vec4(m_forward, 1);
-			m_right = mat * vec4(m_right, 1);
-			m_up = mat * vec4(m_up, 1);
+			auto from = forward();
+			auto to = targetPos - position();
+			auto rot0 = fromToRotation(from, to);
+			
+			vec3 right = glm::cross(to, vec3(0, 1, 0));
+			vec3 targetUp = glm::cross(right, to);
+
+			vec3 oldUp = up();
+			vec3 newUp = rot0 * up();
+			auto rot1 = fromToRotation(newUp, targetUp);	// 调整up向量
+
+			auto rot = rot1 * rot0 * m_rotation;
+			setRotation(rot);
+		}
+
+		quat fromToRotation(vec3 from, vec3 to)
+		{
+			from = normalize(from);
+			to = normalize(to);
+			auto cosTheta = dot(from, to);
+			vec3 rotAxis;
+			if (cosTheta < -1 + 0.001f)
+			{
+				rotAxis = cross(vec3(0.0f, 0.0f, 1.0f), from);
+				if (length2(rotAxis) < 0.01)
+					rotAxis = cross(vec3(1.0f, 0.0f, 0.0f), from);
+				rotAxis = normalize(rotAxis);
+				return angleAxis(180.0f, rotAxis);
+			}
+			if (cosTheta > 0.99999f)
+			{
+				return quat(1, 0, 0, 0);
+			}
+			auto radius = acos(cosTheta);
+			auto angle = radius * 180 / pi<float>();
+			
+			rotAxis = cross(from, to);
+			return angleAxis(radius, normalize(rotAxis));
 		}
 
 		mat4 View()
 		{
-			return glm::lookAt(m_position, m_position + m_forward, m_up);
+			return glm::lookAt(m_position, m_position + forward(), up());
 		}
 
 		mat4 Model()
@@ -89,7 +114,7 @@ namespace yk
 
 		vec3& scale();
 
-		quat& rotation();
+		quat rotation();
 
 		vec3 forward();
 

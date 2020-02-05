@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject MonoBehaviour::s_metaObject = MetaObject{ "MonoBehaviour", "Behaviour", 11, 2};
+MetaObject MonoBehaviour::s_metaObject = MetaObject{ "MonoBehaviour", "Behaviour", 13, 3};

@@ -8,7 +8,6 @@ int main()
 {
 	Application app;
 	GameMgr::start();
-	
 	auto scene = getTestScene();
 	SceneMgr::setCurrentScene(scene);
 	app.exec();

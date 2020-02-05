@@ -19,12 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlwaysLootAt.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="AssetImporter.h" />
     <ClInclude Include="Behaviour.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CamMoveCtrl.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="CubeMove.h" />
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="GameMgr.h" />
     <ClInclude Include="GameObject.h" />
@@ -63,6 +65,7 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
+    <ClCompile Include="metainfo\meta_AlwaysLootAt.cpp" />
     <ClCompile Include="metainfo\meta_Application.cpp" />
     <ClCompile Include="metainfo\meta_BaseComponent.cpp" />
     <ClCompile Include="metainfo\meta_Behaviour.cpp" />
@@ -70,6 +73,7 @@
     <ClCompile Include="metainfo\meta_CamMoveCtrl.cpp" />
     <ClCompile Include="metainfo\meta_ClassInfo.cpp" />
     <ClCompile Include="metainfo\meta_Component.cpp" />
+    <ClCompile Include="metainfo\meta_CubeMove.cpp" />
     <ClCompile Include="metainfo\meta_GameObject.cpp" />
     <ClCompile Include="metainfo\meta_Input.cpp" />
     <ClCompile Include="metainfo\meta_Mesh.cpp" />

@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject MeshFilter::s_metaObject = MetaObject{ "MeshFilter", "Component", 9, 5};
+MetaObject MeshFilter::s_metaObject = MetaObject{ "MeshFilter", "Component", 11, 6};

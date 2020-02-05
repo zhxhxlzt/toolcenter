@@ -5,6 +5,7 @@
 #include "Window.h"
 #include "Application.h"
 #include "Renderer.h"
+#include "Camera.h"
 
 namespace yk
 {
@@ -14,6 +15,10 @@ namespace yk
 		static void init() {
 			s_window = STD make_shared<Window>();
 			s_window->init();
+			glGenBuffers(1, &s_matricesBlock);
+			glBindBuffer(GL_UNIFORM_BUFFER, s_matricesBlock);
+			glBufferData(GL_UNIFORM_BUFFER, 128, NULL, GL_STATIC_DRAW);
+			glBindBuffer(GL_UNIFORM_BUFFER, 0);
 		}
 
 		static void rendering() {
@@ -22,6 +27,8 @@ namespace yk
 			auto scene = SceneMgr::getCurrentScene();
 			// 获取光照信息
 			// 获取相机参数
+			auto mainCamera = scene->mainCamera;
+			setCameraMatrices(mainCamera);
 			// 获取所有Renderer
 			for (auto e : scene->getRenderers())
 			{
@@ -37,5 +44,8 @@ namespace yk
 		static SharedPtr<Window> window() { return s_window; }
 	private:
 		static SharedPtr<Window> s_window;
+		static unsigned int s_matricesBlock;
+		static void setCameraMatrices(SharedPtr<Camera> camera);
+
 	};
 }

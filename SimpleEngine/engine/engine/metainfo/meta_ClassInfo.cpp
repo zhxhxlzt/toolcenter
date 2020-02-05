@@ -8,11 +8,13 @@
 #include"MetaObject.h"
 
 // 包含头文件
+#include "AlwaysLootAt.h"
 #include "Application.h"
 #include "Behaviour.h"
 #include "Camera.h"
 #include "CamMoveCtrl.h"
 #include "Component.h"
+#include "CubeMove.h"
 #include "GameObject.h"
 #include "Input.h"
 #include "Mesh.h"
@@ -31,11 +33,13 @@ using namespace std;
 using namespace yk;
 // 元数据字典
 map<string, MetaObject*> MetaObject::metaObjects = {
-    pair<string, MetaObject*>("Application", &Application::s_metaObject),
+    pair<string, MetaObject*>("AlwaysLookAt", &AlwaysLookAt::s_metaObject),
+	pair<string, MetaObject*>("Application", &Application::s_metaObject),
 	pair<string, MetaObject*>("Behaviour", &Behaviour::s_metaObject),
 	pair<string, MetaObject*>("Camera", &Camera::s_metaObject),
 	pair<string, MetaObject*>("CamMoveCtrl", &CamMoveCtrl::s_metaObject),
 	pair<string, MetaObject*>("Component", &Component::s_metaObject),
+	pair<string, MetaObject*>("CubeMove", &CubeMove::s_metaObject),
 	pair<string, MetaObject*>("GameObject", &GameObject::s_metaObject),
 	pair<string, MetaObject*>("Input", &Input::s_metaObject),
 	pair<string, MetaObject*>("Mesh", &Mesh::s_metaObject),

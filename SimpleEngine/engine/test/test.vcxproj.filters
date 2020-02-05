@@ -34,6 +34,12 @@
     <Image Include="wall.jpg">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="awesomeface.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="container.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\diffuse.frag" />
