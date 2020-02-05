@@ -19,5 +19,6 @@
 #include <SceneMgr.h>
 #include <Shader.h>
 #include <Window.h>
-
+#include <GameMgr.h>
+#include <Texture.h>
 using namespace yk;

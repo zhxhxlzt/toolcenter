@@ -3,6 +3,7 @@
 #include "Object.h"
 #include "TimerMgr.h"
 #include "RenderMgr.h"
+#include "ScriptMgr.h"
 #include "Window.h"
 namespace yk
 {
@@ -16,8 +17,8 @@ namespace yk
 			m_gameUpdate->start(1000 / 60);
 		}
 		static void update() {
+			ScriptMgr::update();
 			// 渲染更新
-			// 事件更新
 			RenderMgr::rendering();
 		}
 		static void exit() {

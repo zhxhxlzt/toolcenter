@@ -129,6 +129,13 @@
   <ItemGroup>
     <ClInclude Include="testScene.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="wall.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\diffuse.frag" />
+    <None Include="shaders\diffuse.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

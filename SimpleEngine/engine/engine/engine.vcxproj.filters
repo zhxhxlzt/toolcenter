@@ -16,6 +16,12 @@
     <Filter Include="io">
       <UniqueIdentifier>{b8f7c1f5-3637-4030-8de2-5c3367b49b0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="asset">
+      <UniqueIdentifier>{9edcfa7b-43a9-4ecd-801f-0cfc9a4c7973}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scripts">
+      <UniqueIdentifier>{f04d41da-070b-49c0-95cb-70e63a141534}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Object.cpp">
@@ -124,15 +130,26 @@
     <ClCompile Include="Scene.cpp">
       <Filter>render</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>asset</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_Texture.cpp" />
+    <ClCompile Include="Material.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_CamMoveCtrl.cpp" />
+    <ClCompile Include="ScriptMgr.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
       <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="MetaObject.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseComponent.h">
       <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
@@ -207,6 +224,22 @@
     <ClInclude Include="ykEngine.h" />
     <ClInclude Include="MeshFilter.h">
       <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources.h">
+      <Filter>asset</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetImporter.h">
+      <Filter>asset</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.hpp">
+      <Filter>thirdparty</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicDebug.h" />
+    <ClInclude Include="CamMoveCtrl.h">
+      <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

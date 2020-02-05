@@ -12,7 +12,7 @@ bool MetaObject::inherits(const MetaObject* metaObject)
 	auto curMetaObject = this;
 	while (curMetaObject != nullptr)
 	{
-		if (curMetaObject->baseClassID == metaObject->classID)
+		if (curMetaObject->classID == metaObject->classID || curMetaObject->baseClassID == metaObject->classID)
 			return true;
 		curMetaObject = getMetaObject(curMetaObject->baseClassName);
 	}

@@ -36,16 +36,16 @@ namespace yk
 			if (triangles.size() > 0)
 				glBufferData(GL_ELEMENT_ARRAY_BUFFER, trianglesSize(), &triangles[0], GL_STATIC_DRAW);
 
-			// vertices
+			// vertices (location=0)
 			glEnableVertexAttribArray(0);
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0);
-			// normals
+			// normals	(location=1)
 			glEnableVertexAttribArray(1);
 			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)verticesSize());
-			// tangents
+			// tangents	(location=2)
 			glEnableVertexAttribArray(2);
 			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)(verticesSize() + normalsSize()));
-			// uvs
+			// uvs		(location=3)
 			glEnableVertexAttribArray(3);
 			glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, sizeof(vec2), (void*)(verticesSize() + normalsSize() + tangentsSize()));
 			glBindVertexArray(0);

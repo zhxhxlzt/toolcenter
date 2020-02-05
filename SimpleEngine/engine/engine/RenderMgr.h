@@ -4,6 +4,7 @@
 #include "SceneMgr.h"
 #include "Window.h"
 #include "Application.h"
+#include "Renderer.h"
 
 namespace yk
 {
@@ -33,7 +34,7 @@ namespace yk
 				Application::instance().exit();
 			}
 		}
-
+		static SharedPtr<Window> window() { return s_window; }
 	private:
 		static SharedPtr<Window> s_window;
 	};

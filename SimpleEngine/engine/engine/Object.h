@@ -22,6 +22,8 @@ template<typename T>
 using SharedPtr = STD shared_ptr<T>;
 template<typename T>
 using Vector = STD vector<T>;
+template<typename T>
+using SharedPtrVector = Vector<SharedPtr<T>>;
 namespace yk
 {
 	class Object : public STD enable_shared_from_this<Object>

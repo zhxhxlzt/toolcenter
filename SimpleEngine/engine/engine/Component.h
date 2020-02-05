@@ -1,23 +1,19 @@
 #pragma once
 
-#include "BaseComponent.h"
+#include "Object.h"
 namespace yk
 {
-	class Component : public BaseComponent
+	class Transform;
+	class GameObject;
+	class Component : public Object
 	{
 		META_OBJECT
 	public:
-		Component() : BaseComponent() {}
-		/*template<class T>
-		STD shared_ptr<T> addComponent()
-		{
-			return gameObject()->addComponent<T>();
-		}
+		STD shared_ptr<GameObject> gameObject() { return m_gameObject.lock(); }
+		STD shared_ptr<Transform> transform();
 
-		template<class T>
-		STD shared_ptr<T> getComponent()
-		{
-			return gameObject()->getComponent<T>();
-		}*/
+	private:
+		friend class GameObject;
+		STD weak_ptr<GameObject> m_gameObject;
 	};
 }

@@ -1,10 +1,11 @@
 #pragma once
 #include "Object.h"
-#include "BaseComponent.h"
+#include "Component.h"
 #include "SceneMgr.h"
 #include <assert.h>
 #include <Renderer.h>
 #include <queue>
+#include "Camera.h"
 namespace yk
 {
 	class Transform;
@@ -12,13 +13,11 @@ namespace yk
 	{
 		META_OBJECT
 	public:
-		GameObject();
-		~GameObject();
 		static SharedPtr<GameObject> create();
 		template<class T>
 		STD shared_ptr<T> addComponent()
 		{
-			return _addComponent<T>(STD is_base_of<BaseComponent, T>());
+			return _addComponent<T>(STD is_base_of<Component, T>());
 		}
 
 		template<class T>
@@ -61,13 +60,20 @@ namespace yk
 					comps.insert(comps.end(), gb_comps.begin(), gb_comps.end());
 					auto gb_child_comps = gb->getComponentsInChildren<T>();
 					comps.insert(comps.end(), gb_child_comps.begin(), gb_child_comps.end());
-					//comps.insert(comps.end(), childComps.begin(), childComps.end());
 				}
 			}
 			return comps;
 		}
 
 		STD shared_ptr<Transform> transform();
+		void delComponent(SharedPtr<Component> comp) {
+			auto it = STD find(m_components.begin(), m_components.end(), comp);
+			if (it != m_components.end())
+			{
+				m_components.erase(it);
+				checkDelComponent(comp);
+			}
+		}
 		bool active = true;
 	private:
 		template<class T>
@@ -75,8 +81,8 @@ namespace yk
 		{
 			auto comp_ptr = STD make_shared<T>();
 			comp_ptr->m_gameObject = STD static_pointer_cast<GameObject>(shared_from_this());
-			comp_ptr->m_transform = m_transform;
 			m_components.push_back(comp_ptr);
+			checkAddComponent(comp_ptr);
 			return comp_ptr;
 		}
 		template<class T>
@@ -84,7 +90,8 @@ namespace yk
 			STD cout << "不能将类型<" << T::metaObject()->className << ">作为GameObject的组件!" << STD endl;
 			return nullptr; 
 		}
-		STD vector<STD shared_ptr<BaseComponent>> m_components;
-		STD shared_ptr<Transform> m_transform;
+		void checkAddComponent(STD shared_ptr<Component> comp);
+		void checkDelComponent(STD shared_ptr<Component> comp);
+		STD vector<STD shared_ptr<Component>> m_components;
 	};
 }

@@ -3,6 +3,7 @@
 #include "Component.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
+using namespace std;
 namespace yk
 {
 	using namespace glm;
@@ -11,7 +12,7 @@ namespace yk
 	{
 		META_OBJECT
 	private:
-		// 世界空间
+		// 本地空间
 		vec3 m_position;
 		vec3 m_scale;
 		vec3 m_forward;

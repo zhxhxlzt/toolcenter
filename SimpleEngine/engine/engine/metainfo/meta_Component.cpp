@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject Component::s_metaObject = MetaObject{ "Component", "BaseComponent", 5, 2};
+MetaObject Component::s_metaObject = MetaObject{ "Component", "Object", 5, 12};
