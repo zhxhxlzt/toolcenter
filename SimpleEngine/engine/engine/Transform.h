@@ -49,7 +49,9 @@ namespace yk
 			setRotation(rot);
 		}
 
-		void setRotation(qua<float>& rot)
+		void rotateAround(vec3 point, vec3 axis, float angle);
+
+		void setRotation(qua<float> rot)
 		{
 			m_rotation = rot;
 		}

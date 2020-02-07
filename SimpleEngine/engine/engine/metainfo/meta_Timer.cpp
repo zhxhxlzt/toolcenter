@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject Timer::s_metaObject = MetaObject{ "Timer", "Object", 17, 14};
+MetaObject Timer::s_metaObject = MetaObject{ "Timer", "Object", 19, 16};

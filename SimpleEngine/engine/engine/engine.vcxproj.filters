@@ -34,9 +34,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="metainfo\meta_BaseComponent.cpp">
-      <Filter>meta</Filter>
-    </ClCompile>
     <ClCompile Include="metainfo\meta_ClassInfo.cpp">
       <Filter>meta</Filter>
     </ClCompile>
@@ -133,19 +130,29 @@
     <ClCompile Include="Texture.cpp">
       <Filter>asset</Filter>
     </ClCompile>
-    <ClCompile Include="metainfo\meta_Texture.cpp" />
     <ClCompile Include="Material.cpp">
       <Filter>render</Filter>
     </ClCompile>
-    <ClCompile Include="metainfo\meta_CamMoveCtrl.cpp" />
     <ClCompile Include="ScriptMgr.cpp">
       <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="metainfo\meta_CubeMove.cpp" />
-    <ClCompile Include="metainfo\meta_AlwaysLootAt.cpp" />
+    <ClCompile Include="metainfo\meta_AlwaysLootAt.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_CamMoveCtrl.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_CubeMove.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_Texture.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_LightRotateAround.cpp" />
+    <ClCompile Include="metainfo\meta_Light.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -247,6 +254,9 @@
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="AlwaysLootAt.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="LightRotateAround.h">
       <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>

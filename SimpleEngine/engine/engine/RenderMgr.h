@@ -17,7 +17,12 @@ namespace yk
 			s_window->init();
 			glGenBuffers(1, &s_matricesBlock);
 			glBindBuffer(GL_UNIFORM_BUFFER, s_matricesBlock);
-			glBufferData(GL_UNIFORM_BUFFER, 128, NULL, GL_STATIC_DRAW);
+			glBufferData(GL_UNIFORM_BUFFER, 144, NULL, GL_STATIC_DRAW);
+			glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+			glGenBuffers(1, &s_pointLightsBlock);
+			glBindBuffer(GL_UNIFORM_BUFFER, s_pointLightsBlock);
+			glBufferData(GL_UNIFORM_BUFFER, 16, NULL, GL_STATIC_DRAW);
 			glBindBuffer(GL_UNIFORM_BUFFER, 0);
 		}
 
@@ -29,6 +34,7 @@ namespace yk
 			// 获取相机参数
 			auto mainCamera = scene->mainCamera;
 			setCameraMatrices(mainCamera);
+			setPointLightsBuffer();
 			// 获取所有Renderer
 			for (auto e : scene->getRenderers())
 			{
@@ -45,7 +51,9 @@ namespace yk
 	private:
 		static SharedPtr<Window> s_window;
 		static unsigned int s_matricesBlock;
+		static unsigned int s_pointLightsBlock;
 		static void setCameraMatrices(SharedPtr<Camera> camera);
+		static void setPointLightsBuffer();
 
 	};
 }

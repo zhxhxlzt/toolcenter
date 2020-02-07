@@ -22,3 +22,16 @@ quat Transform::rotation()
 {
 	return m_rotation;
 }
+
+void Transform::rotateAround(vec3 point, vec3 axis, float angle)
+{
+	angle = radians(angle);
+	auto rot = angleAxis(angle, axis);
+	auto dir = position() - point;
+	auto dis = length(dir);
+	auto targetDir = rot * normalize(dir);
+	auto targetPos = point + dis * targetDir;
+	position() = targetPos;
+	auto targetRot = rot * rotation();
+	setRotation(targetRot);
+}

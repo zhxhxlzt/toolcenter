@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject AlwaysLookAt::s_metaObject = MetaObject{ "AlwaysLookAt", "MonoBehaviour", 1, 13};
+MetaObject AlwaysLookAt::s_metaObject = MetaObject{ "AlwaysLookAt", "MonoBehaviour", 1, 15};

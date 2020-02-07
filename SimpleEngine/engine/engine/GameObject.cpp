@@ -3,6 +3,7 @@
 #include "SceneMgr.h"
 #include "Renderer.h"
 #include "MonoBehaviour.h"
+#include "Light.h"
 using namespace std;
 using namespace yk;
 
@@ -40,6 +41,11 @@ void GameObject::checkAddComponent(STD shared_ptr<Component> comp)
 		auto mb = static_pointer_cast<MonoBehaviour>(comp);
 		mb->Awake();
 		scene->AddMonoBehaviour(mb);
+	}
+	else if (metaObj->inherits(MetaObject::getMetaObject("Light")))
+	{
+		auto lt = static_pointer_cast<Light>(comp);
+		scene->AddLight(lt);
 	}
 }
 

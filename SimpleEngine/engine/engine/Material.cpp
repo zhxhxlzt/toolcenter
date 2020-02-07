@@ -5,9 +5,12 @@ using namespace std;
 
 void Material::use()
 {
-	mainTexture->use(GL_TEXTURE0);
-	shader->set("_MainTex", 0);
-
+	if (mainTexture)
+	{
+		mainTexture->use(GL_TEXTURE0);
+		shader->set("_MainTex", 0);
+	}
+		
 	int idx = 1;
 	for (auto it = m_textures.begin(); it != m_textures.end(); ++it)
 	{

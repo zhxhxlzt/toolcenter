@@ -33,6 +33,7 @@
     <ClInclude Include="GraphicDebug.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="LightRotateAround.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />
@@ -67,7 +68,6 @@
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="metainfo\meta_AlwaysLootAt.cpp" />
     <ClCompile Include="metainfo\meta_Application.cpp" />
-    <ClCompile Include="metainfo\meta_BaseComponent.cpp" />
     <ClCompile Include="metainfo\meta_Behaviour.cpp" />
     <ClCompile Include="metainfo\meta_Camera.cpp" />
     <ClCompile Include="metainfo\meta_CamMoveCtrl.cpp" />
@@ -76,6 +76,8 @@
     <ClCompile Include="metainfo\meta_CubeMove.cpp" />
     <ClCompile Include="metainfo\meta_GameObject.cpp" />
     <ClCompile Include="metainfo\meta_Input.cpp" />
+    <ClCompile Include="metainfo\meta_Light.cpp" />
+    <ClCompile Include="metainfo\meta_LightRotateAround.cpp" />
     <ClCompile Include="metainfo\meta_Mesh.cpp" />
     <ClCompile Include="metainfo\meta_MeshFilter.cpp" />
     <ClCompile Include="metainfo\meta_MeshRenderer.cpp" />

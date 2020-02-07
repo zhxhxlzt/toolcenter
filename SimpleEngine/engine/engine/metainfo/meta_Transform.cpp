@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject Transform::s_metaObject = MetaObject{ "Transform", "Component", 19, 6};
+MetaObject Transform::s_metaObject = MetaObject{ "Transform", "Component", 21, 6};

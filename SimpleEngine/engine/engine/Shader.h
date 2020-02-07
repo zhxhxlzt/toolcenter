@@ -59,6 +59,13 @@ namespace yk
 			if (loc != -1)
 				glUniform1i(loc, value);
 		}
+		template<>
+		void set(const string&& name, vec3 value) const
+		{
+			auto loc = glGetUniformLocation(m_shaderProgram, name.c_str());
+			if (loc != -1)
+				glUniform3fv(loc, 1, value_ptr(value));
+		}
 
 		template<>
 		void set<float>(const string && name, float value) const
@@ -84,7 +91,7 @@ namespace yk
 		{
 			STD ifstream f(path);
 			auto info = (STD stringstream() << f.rdbuf()).str();
-			return move(info);
+			return info;
 		}
 
 		void checkCompileErrors(unsigned int shader, std::string type)

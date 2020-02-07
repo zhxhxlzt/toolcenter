@@ -17,6 +17,8 @@
 #include "CubeMove.h"
 #include "GameObject.h"
 #include "Input.h"
+#include "Light.h"
+#include "LightRotateAround.h"
 #include "Mesh.h"
 #include "MeshFilter.h"
 #include "MeshRenderer.h"
@@ -42,6 +44,8 @@ map<string, MetaObject*> MetaObject::metaObjects = {
 	pair<string, MetaObject*>("CubeMove", &CubeMove::s_metaObject),
 	pair<string, MetaObject*>("GameObject", &GameObject::s_metaObject),
 	pair<string, MetaObject*>("Input", &Input::s_metaObject),
+	pair<string, MetaObject*>("Light", &Light::s_metaObject),
+	pair<string, MetaObject*>("LightRotateAround", &LightRotateAround::s_metaObject),
 	pair<string, MetaObject*>("Mesh", &Mesh::s_metaObject),
 	pair<string, MetaObject*>("MeshFilter", &MeshFilter::s_metaObject),
 	pair<string, MetaObject*>("MeshRenderer", &MeshRenderer::s_metaObject),

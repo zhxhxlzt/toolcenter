@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject MeshRenderer::s_metaObject = MetaObject{ "MeshRenderer", "Renderer", 12, 15};
+MetaObject MeshRenderer::s_metaObject = MetaObject{ "MeshRenderer", "Renderer", 14, 17};

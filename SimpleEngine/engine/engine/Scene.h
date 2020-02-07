@@ -20,14 +20,17 @@ namespace yk
 		void DelRenderer(SharedPtr<Renderer> renderer) { STD remove(m_renderers.begin(), m_renderers.end(), renderer); }
 		void AddMonoBehaviour(SharedPtr<MonoBehaviour> mb) { m_monoBehaviours.push_back(mb); }
 		void DelMonoBehaviour(SharedPtr<MonoBehaviour> mb) { STD remove(m_monoBehaviours.begin(), m_monoBehaviours.end(), mb); }
-
+		void AddLight(SharedPtr<Light> lt) { m_lights.push_back(lt); }
+		void DelLight(SharedPtr<Light> lt) { STD remove(m_lights.begin(), m_lights.end(), lt); }
 		SharedPtrVector<Renderer> getRenderers() { return m_renderers; }
 		SharedPtrVector<MonoBehaviour> getMonoBehaviours() { return m_monoBehaviours; }
+		SharedPtrVector<Light> getLights() { return m_lights; }
 		SharedPtr<Camera> mainCamera;
 
 	private:
 		SharedPtrVector<GameObject> m_rootGameObjects;
 		SharedPtrVector<Renderer>	m_renderers;
 		SharedPtrVector<MonoBehaviour> m_monoBehaviours;
+		SharedPtrVector<Light> m_lights;
 	};
 }
