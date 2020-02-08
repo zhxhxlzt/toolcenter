@@ -259,6 +259,9 @@
     <ClInclude Include="LightRotateAround.h">
       <Filter>scripts</Filter>
     </ClInclude>
+    <ClInclude Include="FrameBuffer.h">
+      <Filter>render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="metainfo.py" />

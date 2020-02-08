@@ -28,6 +28,7 @@ namespace yk
 			glGenTextures(1, &m_texture);
 			init(); 
 		}
+		Texture(GLint texID) : m_texture(texID) {}
 		void init(
 			GLenum target = GL_TEXTURE_2D,
 			WrapMode wrap_s = GL_Repeat,
@@ -46,6 +47,7 @@ namespace yk
 			glBindTexture(target, m_texture);
 		}
 		GLuint getTextureID() { return m_texture; }
+		void setTextureID(GLint texID) { m_texture = texID; }
 	private:
 		GLuint m_texture;
 	};

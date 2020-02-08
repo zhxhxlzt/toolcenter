@@ -7,10 +7,14 @@
 using namespace yk;
 using namespace std;
 
+SharedPtr<Mesh> getScreenMesh();
 SharedPtr<Mesh> getQuadMesh();
 SharedPtr<Mesh> getCubeMesh();
 SharedPtr<GameObject> getLight();
+SharedPtr<GameObject> getDirectionalLight();
+SharedPtr<GameObject> getPlane();
 SharedPtr<GameObject> getBox();
+SharedPtr<GameObject> getShadowDebug();
 SharedPtr<GameObject> getCamera();
 
 SharedPtr<Scene> getTestScene()
@@ -18,27 +22,52 @@ SharedPtr<Scene> getTestScene()
 	auto scene = STD make_shared<Scene>();
 	SceneMgr::setCurrentScene(scene);
 
-    // 点光
-    auto light = getLight();
-    
+    // 平行光
+    auto light = getDirectionalLight();
+
     // 正方体
     auto box = getBox();
+    light->addComponent<LightRotateAround>();
     light->getComponent<LightRotateAround>()->target = box->transform();
+
+    // 地板
+    auto plane = getPlane();
+    plane->transform()->translate(vec3(.0f, -0.505f, 0));
+    plane->transform()->scale() *= vec3(100, 1.0f, 100);
 
 	// 相机
     auto camera = getCamera();
-
 	return scene;
+}
+
+SharedPtr<Mesh> getScreenMesh()
+{
+    auto mesh = make_shared<Mesh>();
+    mesh->vertices = vector<vec3>
+    {
+        vec3(-1.0f,  1.0f, 0.0f),
+        vec3(-1.0f, -1.0f, 0.0f),
+        vec3( 1.0f,  1.0f, 0.0f),
+        vec3( 1.0f, -1.0f, 0.0f),
+    };
+
+    mesh->uv = vector<vec2>{
+        vec2(0.0f, 1.0f),
+        vec2(0.0f, 0.0f),
+        vec2(1.0f, 1.0f),
+        vec2(1.0f, 0.0f),
+    };
+    return mesh;
 }
 
 SharedPtr<Mesh> getQuadMesh()
 {
     auto mesh = make_shared<Mesh>();
     mesh->vertices = vector<vec3>{
-        vec3(0.5f, 0.5f, 0.0f),	// 右上角
-        vec3(0.5f, -0.5f, 0.0f),// 右下角
-        vec3(-0.5f, -0.5f, 0.0f),// 左下角
-        vec3(-0.5f, 0.5f, 0.0f)// 左上角
+        vec3(0.5f,  0.0f, -0.5f),	// 右上角
+        vec3(0.5f,  0.0f,  0.5f),// 右下角
+        vec3(-0.5f, 0.0f,  0.5f),// 左下角
+        vec3(-0.5f, 0.0f, -0.5f)// 左上角
     };
     mesh->uv = vector<vec2>{
         vec2(1, 1),
@@ -47,9 +76,17 @@ SharedPtr<Mesh> getQuadMesh()
         vec2(0, 1)
     };
     mesh->triangles = vector<int>{ 0, 1, 3, 1, 2, 3 };
+    mesh->normals = vector<vec3>{
+        vec3(0, 1, 0),
+        vec3(0, 1, 0),
+        vec3(0, 1, 0),
+        vec3(0, 1, 0)
+    };
     mesh->setupMesh();
     return mesh;
 }
+
+
 
 SharedPtr<Mesh> getCubeMesh() {
 	auto mesh = make_shared<Mesh>();
@@ -193,6 +230,23 @@ SharedPtr<Mesh> getCubeMesh() {
     return mesh;
 }
 
+SharedPtr<GameObject> getDirectionalLight()
+{
+    auto gb = GameObject::create();
+    auto render = gb->addComponent<MeshRenderer>();
+    auto filter = gb->addComponent<MeshFilter>();
+    render->material = make_shared<Material>(make_shared<Shader>("shaders/diffuse.vert", "shaders/light.frag"));
+    filter->sharedMesh = getCubeMesh();
+    gb->transform()->translate(vec3(-2.0f, 4.0f, -1.0f));
+    gb->transform()->scale() *= vec3(0.5, 0.5, 0.5f);
+    gb->transform()->LookAt(vec3(0, 0, 0));
+
+    auto light = gb->addComponent<Light>();
+    light->setLightType(LightType::Directional);
+    light->setColor(vec3(1.0f, 1.0f, 1.0f));
+    return gb;
+}
+
 SharedPtr<GameObject> getLight()
 {
     auto gb = GameObject::create();
@@ -221,6 +275,34 @@ SharedPtr<GameObject> getBox()
     auto mesh = getCubeMesh();
     filter->sharedMesh = mesh;
     return cube;
+}
+
+SharedPtr<GameObject> getPlane()
+{
+    auto plane = GameObject::create();
+    auto renderer = plane->addComponent<MeshRenderer>();
+    auto filter = plane->addComponent<MeshFilter>();
+    auto shader = make_shared<Shader>("shaders/diffuse.vert", "shaders/diffuse.frag");
+    renderer->material = make_shared<Material>(shader);
+    auto tx = make_shared<Texture>();
+    tx->load("wall.jpg");
+    renderer->material->mainTexture = tx;
+    auto mesh = getQuadMesh();
+    filter->sharedMesh = mesh;
+    return plane;
+}
+
+SharedPtr<GameObject> getShadowDebug()
+{
+    auto plane = GameObject::create();
+    auto renderer = plane->addComponent<MeshRenderer>();
+    auto filter = plane->addComponent<MeshFilter>();
+    auto shader = make_shared<Shader>("shaders/screen.vert", "shaders/screen.frag");
+    shader->name = "screen shadow";
+    renderer->material = make_shared<Material>(shader);
+    auto mesh = getScreenMesh();
+    filter->sharedMesh = mesh;
+    return plane;
 }
 
 SharedPtr<GameObject> getCamera()

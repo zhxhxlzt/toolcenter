@@ -12,6 +12,6 @@ namespace yk
 		SharedPtr<Material> material;
 	private:
 		friend class RenderMgr;
-		virtual void rendering() {}
+		virtual void rendering(SharedPtr<Shader> shader=nullptr) {}
 	};
 }

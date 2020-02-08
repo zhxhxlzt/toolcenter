@@ -28,6 +28,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="CubeMove.h" />
     <ClInclude Include="Delegate.h" />
+    <ClInclude Include="FrameBuffer.h" />
     <ClInclude Include="GameMgr.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GraphicDebug.h" />
@@ -160,8 +161,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>E:\Works\git_trunk\toolcenter\SimpleEngine\include;E:\Works\git_trunk\toolcenter\SimpleEngine\engine\engine;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\Works\git_trunk\toolcenter\SimpleEngine\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\include;..\engine;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

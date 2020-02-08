@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Behaviour.h"
+#include "FrameBuffer.h"
 
 namespace yk
 {
@@ -27,6 +28,8 @@ namespace yk
 
 		unsigned int GetColorTex() { return tex; }
 
+		FrameBuffer& getShadowFrameBuffer() { return m_shadowBuffer; }
+
 		void RenderPostEffect()
 		{
 
@@ -42,8 +45,13 @@ namespace yk
 		unsigned int ste;	// Ä£°å»º³å¸½¼þ
 		unsigned int rbo;	// äÖÈ¾»º³å¶ÔÏó
 
+		FrameBuffer m_shadowBuffer;
+
 		void initFrameBuffer()
 		{
+			m_shadowBuffer.reSize(4096, 4096);
+			m_shadowBuffer.initDepthMapFrameBuffer();
+			
 			glGenFramebuffers(1, &fbo);
 			glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 

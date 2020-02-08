@@ -11,7 +11,7 @@ namespace yk
 
 	private:
 		friend class RenderMgr;
-		void rendering() override;
+		void rendering(SharedPtr<Shader> shader=nullptr) override;
 	};
 
 }

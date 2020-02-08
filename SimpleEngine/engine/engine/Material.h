@@ -10,7 +10,7 @@ namespace yk
 		Material(SharedPtr<Shader> shader) : Object(), shader(shader) {}
 		SharedPtr<Shader> shader;
 		SharedPtr<Texture> mainTexture;
-		void use();
+		void setShaderTexture(SharedPtr<Shader> shader);
 		void setTexture(string name, SharedPtr<Texture> tex);
 	private:
 		STD map<const string, SharedPtr<Texture>> m_textures;
