@@ -65,7 +65,7 @@ float CalShadowFactor(vec4 lightSpaceCoord)
 	float	curDepth	= projCoords.z;
 	if (curDepth > 1.0f)
 		return 0.0f;
-	float	shadow		= curDepth - 0.005 > closetDepth ? 1.0f : 0.0f;
+	float	shadow		= curDepth > closetDepth ? 1.0f : 0.0f;
 	return shadow;
 }
 
@@ -117,13 +117,10 @@ void main()
 		DirectionalLightInfo  l = directLight[0];
 		vec3    lightDir	= normalize(-l.dir);
 	}
-	
-	
-	//vec4	dirLightColor	= phongDirectLight(1, 1, l.color, norm, lightDir, viewDir);
 
 	PointLightInfo p = pointLight[0];
 	vec3	pointDir = FragPos - p.pos;
 	float	curDepth = length(pointDir);
 	vec4	pointLightColor = phongPointLight(1, 1, p.color, p.pos, norm, viewDir);
-	FragColor = pointLightColor * objectColor;
+	FragColor = pointLightColor * objectColor + ambientColor;
 }

@@ -4,6 +4,7 @@
 #include <AlwaysLootAt.h>
 #include <LightRotateAround.h>
 #include <Light.h>
+
 using namespace yk;
 using namespace std;
 
@@ -28,25 +29,44 @@ SharedPtr<Scene> getTestScene()
     //auto light = getDirectionalLight();
 
     auto pointLight = getPointLight();
-    pointLight->transform()->translate(vec3(0, 5, 0));
-    //pointLight->addComponent<CamMoveCtrl>();
+    pointLight->transform()->translate(vec3(3, 5, 0));
+
 
     // debug cube map shadow
-    auto debugCube = getCubeDebugBox();
-    debugCube->transform()->translate(vec3(0, 10, 0));
-    debugCube->transform()->scale() *= vec3(5, 5, 5);
+    //auto debugCube = getCubeDebugBox();
+    //debugCube->transform()->translate(vec3(0, 10, 0));
+    //debugCube->transform()->scale() *= vec3(5, 5, 5);
 
     // 正方体
     auto box = getBox();
     auto box2 = getBox();
+    auto box3 = getBox();
+    auto box4 = getBox();
+    auto box5 = getBox();
     box2->transform()->translate(vec3(1.5f, 0, 0));
+    box3->transform()->translate(vec3(8.0f, 0, 0));
+    box4->transform()->translate(vec3(5, 5, -5));
+    box5->transform()->translate(vec3(1, 8, -7));
     //light->addComponent<LightRotateAround>();
     //light->getComponent<LightRotateAround>()->target = box->transform();
-    //pointLight->addComponent<LightRotateAround>()->target = box->transform();
+    pointLight->addComponent<LightRotateAround>()->target = box->transform();
     // 地板
-    //auto plane = getPlane();
-    //plane->transform()->translate(vec3(.0f, -1.0f, 0));
-    //plane->transform()->scale() *= vec3(50, 1.0f, 50);
+    auto plane = getPlane();
+    plane->transform()->translate(vec3(.0f, -0.51f, 0));
+    plane->transform()->scale() *= vec3(50, 0.2f, 50);
+    auto plane2 = getBox();
+    plane2->transform()->scale() *= vec3(1.0f, 50.0f, 50);
+    plane2->transform()->translate(vec3(10, 0, 0));
+    auto plane3 = getBox();
+    plane3->transform()->scale() *= vec3(50, 50, 0.2f);
+    plane3->transform()->translate(vec3(0, 0, -10));
+    auto plane4 = getBox();
+    plane4->transform()->scale() *= vec3(0.2f, 50, 50.0f);
+    plane4->transform()->translate(vec3(-10, 0, 0));
+    auto plane5 = getBox();
+    plane5->transform()->scale() *= vec3(50.0f, 0.2f, 50.0f);
+    plane5->transform()->translate(vec3(0, 20, 0));
+
 
 	// 相机
     auto camera = getCamera();

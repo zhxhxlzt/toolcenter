@@ -171,7 +171,7 @@ void RenderMgr::renderPointShadow()
     shader->use();
     shader->set("lightPos", pointLight->transform()->position());
     shader->set("far_plane", 25.0f);
-    glm::mat4 shadowProj = glm::perspective(90.0f, 1.0f, 0.1f, 25.0f);
+    glm::mat4 shadowProj = glm::perspective(radians(90.0f), 1.0f, 0.1f, 25.0f);
     
     auto lightPos = pointLight->transform()->position();
     std::vector<glm::mat4> shadowTransforms;

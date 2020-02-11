@@ -53,7 +53,7 @@ namespace yk
 		{
 			m_shadowBuffer.reSize(4096, 4096);
 			m_shadowBuffer.initDepthMapFrameBuffer();
-			m_pointShadowBuffer.reSize(1024, 1024);
+			m_pointShadowBuffer.reSize(4096, 4096);
 			m_pointShadowBuffer.initCubeMapDepthMapFrameBuffer();
 			
 			glGenFramebuffers(1, &fbo);
