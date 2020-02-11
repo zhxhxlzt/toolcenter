@@ -55,5 +55,6 @@
     <None Include="shaders\light.vert" />
     <None Include="shaders\debugCubemap.vert" />
     <None Include="shaders\debugCubemap.frag" />
+    <None Include="engine_debug.props" />
   </ItemGroup>
 </Project>

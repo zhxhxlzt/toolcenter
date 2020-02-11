@@ -67,7 +67,6 @@ SharedPtr<Scene> getTestScene()
     plane5->transform()->scale() *= vec3(50.0f, 0.2f, 50.0f);
     plane5->transform()->translate(vec3(0, 20, 0));
 
-
 	// Па»ъ
     auto camera = getCamera();
 	return scene;
