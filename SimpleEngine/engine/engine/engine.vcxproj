@@ -27,6 +27,7 @@
     <ClInclude Include="CamMoveCtrl.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CubeMove.h" />
+    <ClInclude Include="Decorate.h" />
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="FrameBuffer.h" />
     <ClInclude Include="GameMgr.h" />
@@ -75,6 +76,7 @@
     <ClCompile Include="metainfo\meta_ClassInfo.cpp" />
     <ClCompile Include="metainfo\meta_Component.cpp" />
     <ClCompile Include="metainfo\meta_CubeMove.cpp" />
+    <ClCompile Include="metainfo\meta_Decorate.cpp" />
     <ClCompile Include="metainfo\meta_GameObject.cpp" />
     <ClCompile Include="metainfo\meta_Input.cpp" />
     <ClCompile Include="metainfo\meta_Light.cpp" />

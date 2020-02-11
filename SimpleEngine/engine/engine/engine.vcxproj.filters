@@ -153,6 +153,7 @@
     </ClCompile>
     <ClCompile Include="metainfo\meta_LightRotateAround.cpp" />
     <ClCompile Include="metainfo\meta_Light.cpp" />
+    <ClCompile Include="metainfo\meta_Decorate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -260,6 +261,9 @@
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="FrameBuffer.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Decorate.h">
       <Filter>render</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,9 +3,8 @@ out vec4 FragColor;
 
 uniform sampler2D _MainTex;
 uniform sampler2D _ShadowMap;
-uniform vec3 lightColor;
-uniform vec3 lightPos;
-uniform vec3 directLightDir;
+uniform samplerCube _PointShadowMap;
+
 in vec3 ViewPos;
 
 in vec2 TexCoord;
@@ -21,28 +20,36 @@ struct Material
 	float	  smoothless;
 };
 
-layout (std140, binding=1) uniform PointLights
-{
-	vec3	light;
+struct PointLightInfo
+{						// 对齐量		// 偏移量
+	vec3 color;			// 16			// 0
+	vec3 pos;			// 16			// 16
+	float intensity;	// 4			// 32	size ==> 36 ==> 48(填充到vec4的倍数)
 };
 
-struct DirectionalLight
+layout (std140, binding=1) uniform PointLights
+{										// 对齐量		// 偏移量
+	PointLightInfo	pointLight[10];		// 480			// 0
+	int				pointLightCount;	// 4			// 480	size ==> 484
+};
+
+struct DirectionalLightInfo
 {						// 对齐量	偏移量
-	float	intensity;	// 4		0
-	vec3	color;		// 16		16   <-- 4	必需是对齐量的位数
-	vec3	dir;		// 16		32	 size ===> 48
+	vec3	color;		// 16		0   
+	vec3	dir;		// 16		16	 
+	vec3	pos;		// 16		32
+	float	intensity;	// 4		48		size ==> 52 ==> 64
 };
 
 layout (std140, binding=2) uniform DirectLights
 {
-	DirectionalLight	directLight[10];	// 480,		0
-	int				count;				// 4		484		size ===> 488
+	DirectionalLightInfo	directLight[10];	// 640,		0		
+	int						directLightCount;	// 4		640		size ==> 644	
 };
 
 
-
 float near = 0.1; 
-float far  = 10.0; 
+float far  = 25; 
 
 float LinearizeDepth(float depth) 
 {
@@ -62,38 +69,61 @@ float CalShadowFactor(vec4 lightSpaceCoord)
 	return shadow;
 }
 
-vec4 phongDirectLight( 
-	float ambient, float diff, float spec, vec3 lightColor,
+float CalPointShadowFactor(vec3 lightPos)
+{
+	vec3 lightToFrag = FragPos - lightPos;
+	float depth = texture(_PointShadowMap, lightToFrag).r * far;
+	float curDepth = length(lightToFrag);
+	float shadow = (curDepth - 0.05) > depth ? 1 : 0;
+	return shadow;
+}
+
+vec4 phongDirectLight(float diff, float spec, vec3 lightColor,
 	vec3 norm, vec3 lightDir, vec3 viewDir)
 {
-	vec3	ambientColor = ambient * lightColor;
 	float	diffuse		 = max(dot(norm, lightDir), 0);
 	vec3	diffColor	 = diff * diffuse * lightColor;
 	vec3	reflectDir	 = reflect(-lightDir, norm);
 	float	specular	 = pow(max(dot(reflectDir, viewDir), 0), 32);
 	vec3	specColor	 = spec * specular * lightColor;
 	float	shadow		 = CalShadowFactor(FragPosLightSpace);
-	return vec4(ambientColor + (1 - shadow) *(diffColor + specColor), 1);
-	return vec4(diffuse * diffColor, 1);
-	return vec4(lightDir, 1);
+	return vec4((1 - shadow) *(diffColor + specColor), 1);
 }
 
-
+vec4 phongPointLight(float diff, float spec, vec3 lightColor, vec3 lightPos,
+					 vec3 norm, vec3 viewDir)
+{
+	vec3	lightDir	 = normalize(lightPos - FragPos);
+	float	diffuse		 = max(dot(norm, lightDir), 0);
+	vec3	diffColor	 = diff * diffuse * lightColor;
+	vec3	reflectDir	 = reflect(-lightDir, norm);
+	float	specular	 = pow(max(dot(reflectDir, viewDir), 0), 32);
+	vec3	specColor	 = spec * specular * lightColor;
+	float	shadow		 = CalPointShadowFactor(lightPos);
+	return vec4((1 - shadow) *(diffColor + specColor), 1);
+	//return vec4(diffColor + specColor, 1);	
+}
 
 
 void main()
 {
-	DirectionalLight  l = directLight[0];
-	vec3	norm		= normalize(Normal);
-	vec3    lightDir	= normalize(-l.dir);
-
-	vec3	viewDir		= normalize(ViewPos - FragPos);
-	vec4	phongColor	= phongDirectLight(0.3, 1, 1, l.color, norm, lightDir, viewDir);
-
 	vec4	objectColor = texture(_MainTex, TexCoord);
+	vec4	ambientColor = 0.2 * objectColor;
+
+	vec3	norm		= normalize(Normal);
+	vec3	viewDir		= normalize(ViewPos - FragPos);
+
+	if (directLightCount > 0){
+		DirectionalLightInfo  l = directLight[0];
+		vec3    lightDir	= normalize(-l.dir);
+	}
 	
-	FragColor = phongColor * objectColor;
 	
-	//vec4	dep	= texture(_ShadowMap, TexCoord);
-	//FragColor	= vec4(vec3(dep.r), 1.0);
+	//vec4	dirLightColor	= phongDirectLight(1, 1, l.color, norm, lightDir, viewDir);
+
+	PointLightInfo p = pointLight[0];
+	vec3	pointDir = FragPos - p.pos;
+	float	curDepth = length(pointDir);
+	vec4	pointLightColor = phongPointLight(1, 1, p.color, p.pos, norm, viewDir);
+	FragColor = pointLightColor * objectColor;
 }

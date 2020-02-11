@@ -12,8 +12,10 @@ SharedPtr<Mesh> getQuadMesh();
 SharedPtr<Mesh> getCubeMesh();
 SharedPtr<GameObject> getLight();
 SharedPtr<GameObject> getDirectionalLight();
+SharedPtr<GameObject> getPointLight();
 SharedPtr<GameObject> getPlane();
 SharedPtr<GameObject> getBox();
+SharedPtr<GameObject> getCubeDebugBox();
 SharedPtr<GameObject> getShadowDebug();
 SharedPtr<GameObject> getCamera();
 
@@ -23,17 +25,28 @@ SharedPtr<Scene> getTestScene()
 	SceneMgr::setCurrentScene(scene);
 
     // 平行光
-    auto light = getDirectionalLight();
+    //auto light = getDirectionalLight();
+
+    auto pointLight = getPointLight();
+    pointLight->transform()->translate(vec3(0, 5, 0));
+    //pointLight->addComponent<CamMoveCtrl>();
+
+    // debug cube map shadow
+    auto debugCube = getCubeDebugBox();
+    debugCube->transform()->translate(vec3(0, 10, 0));
+    debugCube->transform()->scale() *= vec3(5, 5, 5);
 
     // 正方体
     auto box = getBox();
-    light->addComponent<LightRotateAround>();
-    light->getComponent<LightRotateAround>()->target = box->transform();
-
+    auto box2 = getBox();
+    box2->transform()->translate(vec3(1.5f, 0, 0));
+    //light->addComponent<LightRotateAround>();
+    //light->getComponent<LightRotateAround>()->target = box->transform();
+    //pointLight->addComponent<LightRotateAround>()->target = box->transform();
     // 地板
-    auto plane = getPlane();
-    plane->transform()->translate(vec3(.0f, -0.505f, 0));
-    plane->transform()->scale() *= vec3(100, 1.0f, 100);
+    //auto plane = getPlane();
+    //plane->transform()->translate(vec3(.0f, -1.0f, 0));
+    //plane->transform()->scale() *= vec3(50, 1.0f, 50);
 
 	// 相机
     auto camera = getCamera();
@@ -85,8 +98,6 @@ SharedPtr<Mesh> getQuadMesh()
     mesh->setupMesh();
     return mesh;
 }
-
-
 
 SharedPtr<Mesh> getCubeMesh() {
 	auto mesh = make_shared<Mesh>();
@@ -247,6 +258,21 @@ SharedPtr<GameObject> getDirectionalLight()
     return gb;
 }
 
+SharedPtr<GameObject> getPointLight()
+{
+    auto gb = GameObject::create();
+    auto render = gb->addComponent<MeshRenderer>();
+    auto filter = gb->addComponent<MeshFilter>();
+    render->material = make_shared<Material>(make_shared<Shader>("shaders/light.vert", "shaders/light.frag"));
+    filter->sharedMesh = getCubeMesh();
+    //gb->transform()->translate(vec3(-2.0f, 4.0f, -1.0f));
+    //gb->transform()->scale() *= vec3(0.5, 0.5, 0.5f);
+    auto light = gb->addComponent<Light>();
+    light->setLightType(LightType::Point);
+    light->setColor(vec3(1.0f, 1.0f, 1.0f));
+    return gb;
+}
+
 SharedPtr<GameObject> getLight()
 {
     auto gb = GameObject::create();
@@ -272,6 +298,19 @@ SharedPtr<GameObject> getBox()
     auto tx = make_shared<Texture>();
     tx->load("container.jpg");
     renderer->material->mainTexture = tx;
+    auto mesh = getCubeMesh();
+    filter->sharedMesh = mesh;
+    return cube;
+}
+
+SharedPtr<GameObject> getCubeDebugBox()
+{
+    auto cube = GameObject::create();
+    auto renderer = cube->addComponent<MeshRenderer>();
+    auto filter = cube->addComponent<MeshFilter>();
+    auto shader = make_shared<Shader>("shaders/debugCubemap.vert", "shaders/debugCubemap.frag");
+    renderer->castShadow = false;
+    renderer->material = make_shared<Material>(shader);
     auto mesh = getCubeMesh();
     filter->sharedMesh = mesh;
     return cube;

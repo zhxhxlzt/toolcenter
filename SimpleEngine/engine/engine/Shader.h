@@ -7,14 +7,15 @@ namespace yk
 	{
 	public:
 		Shader() = default;
-		Shader(string vShaderPath, string fShaderPath)
+		Shader(string vShaderPath, string fShaderPath, string gShaderPath="")
 		{
 			auto vCode = loadShaderScript(vShaderPath);
 			auto fCode = loadShaderScript(fShaderPath);
-			init(vCode.c_str(), fCode.c_str());
+			auto gCode = gShaderPath.empty() ? "" : loadShaderScript(gShaderPath);
+			init(vCode.c_str(), fCode.c_str(), gCode.c_str());
 		}
 
-		void init(const char* vCode, const char* fCode)
+		void init(const char* vCode, const char* fCode, const char* gCode)
 		{
 			glDeleteProgram(m_shaderProgram);
 			auto vertex = glCreateShader(GL_VERTEX_SHADER);
@@ -32,6 +33,16 @@ namespace yk
 			auto ID = glCreateProgram();
 			glAttachShader(ID, vertex);
 			glAttachShader(ID, frag);
+
+			if (gCode[0] != '\0')
+			{
+				auto geom = glCreateShader(GL_GEOMETRY_SHADER);
+				glShaderSource(geom, 1, &gCode, NULL);
+				glCompileShader(geom);
+				checkCompileErrors(geom, "GEOMETRY");
+				glAttachShader(ID, geom);
+			}
+
 			glLinkProgram(ID);
 			checkCompileErrors(ID, "PROGRAM");
 			m_shaderProgram = ID;
@@ -44,7 +55,7 @@ namespace yk
 		{
 			auto vCode = loadShaderScript(vShaderPath);
 			auto fCode = loadShaderScript(fShaderPath);
-			init(vCode.c_str(), fCode.c_str());
+			init(vCode.c_str(), fCode.c_str(), "");
 		}
 
 		void use()

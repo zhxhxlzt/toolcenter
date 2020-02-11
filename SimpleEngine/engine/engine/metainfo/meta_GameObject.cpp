@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject GameObject::s_metaObject = MetaObject{ "GameObject", "Object", 8, 16};
+MetaObject GameObject::s_metaObject = MetaObject{ "GameObject", "Object", 9, 17};

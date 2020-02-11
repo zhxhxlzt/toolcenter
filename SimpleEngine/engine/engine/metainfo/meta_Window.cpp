@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject Window::s_metaObject = MetaObject{ "Window", "Object", 22, 16};
+MetaObject Window::s_metaObject = MetaObject{ "Window", "Object", 23, 17};

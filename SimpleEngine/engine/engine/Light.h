@@ -1,7 +1,6 @@
 #pragma once
 #include "Object.h"
 #include "Behaviour.h"
-
 namespace yk
 {
 	enum class LightType { Spot=0, Directional=1, Point=2};

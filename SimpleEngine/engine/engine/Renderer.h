@@ -8,6 +8,7 @@ namespace yk
 		META_OBJECT
 	public:
 		bool enabled = true;
+		bool castShadow = true;
 		STD vector<SharedPtr<Material>> materials;
 		SharedPtr<Material> material;
 	private:

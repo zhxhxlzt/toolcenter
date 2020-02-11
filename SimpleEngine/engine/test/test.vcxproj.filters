@@ -49,5 +49,11 @@
     <None Include="shaders\shadowmap.frag" />
     <None Include="shaders\screen.vert" />
     <None Include="shaders\screen.frag" />
+    <None Include="shaders\pointshadowmap.vert" />
+    <None Include="shaders\pointshadowmap.geom" />
+    <None Include="shaders\pointshadowmap.frag" />
+    <None Include="shaders\light.vert" />
+    <None Include="shaders\debugCubemap.vert" />
+    <None Include="shaders\debugCubemap.frag" />
   </ItemGroup>
 </Project>

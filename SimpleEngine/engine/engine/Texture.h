@@ -20,6 +20,9 @@ namespace yk
 		GL_Linear_Mipmap_Linear = GL_LINEAR_MIPMAP_LINEAR
 	};
 
+	enum class TextureType{ Texture2D = GL_TEXTURE_2D, TextureCube = GL_TEXTURE_CUBE_MAP
+	};
+
 	class Texture : public Object
 	{
 		META_OBJECT
@@ -28,7 +31,7 @@ namespace yk
 			glGenTextures(1, &m_texture);
 			init(); 
 		}
-		Texture(GLint texID) : m_texture(texID) {}
+		Texture(GLint texID, TextureType textureType=TextureType::Texture2D) : m_texture(texID), m_textureType(textureType){}
 		void init(
 			GLenum target = GL_TEXTURE_2D,
 			WrapMode wrap_s = GL_Repeat,
@@ -41,14 +44,16 @@ namespace yk
 			glTexParameteri(target, GL_TEXTURE_MIN_FILTER, min_filter);
 			glTexParameteri(target, GL_TEXTURE_MAG_FILTER, mag_filter);
 		}
-		void load(STD string path, GLenum target = GL_TEXTURE_2D);
-		void use(GLuint index, GLenum target = GL_TEXTURE_2D) {
+		void load(STD string path, TextureType textureType = TextureType::Texture2D);
+		void use(GLuint index) {
 			glActiveTexture(index);
-			glBindTexture(target, m_texture);
+			glBindTexture((GLenum)m_textureType, m_texture);
 		}
 		GLuint getTextureID() { return m_texture; }
 		void setTextureID(GLint texID) { m_texture = texID; }
+		void setTextureType(TextureType textureType) { m_textureType = textureType; }
 	private:
 		GLuint m_texture;
+		TextureType m_textureType;
 	};
 }

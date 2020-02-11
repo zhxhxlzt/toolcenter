@@ -29,6 +29,7 @@ namespace yk
 		unsigned int GetColorTex() { return tex; }
 
 		FrameBuffer& getShadowFrameBuffer() { return m_shadowBuffer; }
+		FrameBuffer& getPointShadowFrameBuffer() { return m_pointShadowBuffer; }
 
 		void RenderPostEffect()
 		{
@@ -46,11 +47,14 @@ namespace yk
 		unsigned int rbo;	// ‰÷»æª∫≥Â∂‘œÛ
 
 		FrameBuffer m_shadowBuffer;
+		FrameBuffer m_pointShadowBuffer;
 
 		void initFrameBuffer()
 		{
 			m_shadowBuffer.reSize(4096, 4096);
 			m_shadowBuffer.initDepthMapFrameBuffer();
+			m_pointShadowBuffer.reSize(1024, 1024);
+			m_pointShadowBuffer.initCubeMapDepthMapFrameBuffer();
 			
 			glGenFramebuffers(1, &fbo);
 			glBindFramebuffer(GL_FRAMEBUFFER, fbo);

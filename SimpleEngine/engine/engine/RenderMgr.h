@@ -27,6 +27,7 @@ namespace yk
 		static void setDirectionalLightsBuffer();
 		static void setLightSpaceMatrix(mat4 mat);
 		static void renderShadowMap();
+		static void renderPointShadow();
 
 	};
 }

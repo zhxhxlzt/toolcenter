@@ -15,6 +15,7 @@
 #include "CamMoveCtrl.h"
 #include "Component.h"
 #include "CubeMove.h"
+#include "Decorate.h"
 #include "GameObject.h"
 #include "Input.h"
 #include "Light.h"
@@ -42,6 +43,7 @@ map<string, MetaObject*> MetaObject::metaObjects = {
 	pair<string, MetaObject*>("CamMoveCtrl", &CamMoveCtrl::s_metaObject),
 	pair<string, MetaObject*>("Component", &Component::s_metaObject),
 	pair<string, MetaObject*>("CubeMove", &CubeMove::s_metaObject),
+	pair<string, MetaObject*>("Decorate", &Decorate::s_metaObject),
 	pair<string, MetaObject*>("GameObject", &GameObject::s_metaObject),
 	pair<string, MetaObject*>("Input", &Input::s_metaObject),
 	pair<string, MetaObject*>("Light", &Light::s_metaObject),
