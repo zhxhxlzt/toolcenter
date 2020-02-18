@@ -23,8 +23,8 @@ namespace yk
 		static void cursorPositionCallback(GLFWwindow* window, double x, double y)
 		{
 			////cout << "mouseX: " << x << "mouseY: " << y << endl;
-			deltaX += (Input::x - x);
-			deltaY += (Input::y - y);
+			deltaX += -(Input::x - x);
+			deltaY += -(Input::y - y);
 
 			Input::x = x;
 			Input::y = y;

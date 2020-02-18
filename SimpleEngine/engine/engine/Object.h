@@ -1,4 +1,5 @@
 #pragma once
+#define GLM_FORCE_LEFT_HANDED
 #include <set>
 #include <map>
 #include <vector>
@@ -17,6 +18,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
 using namespace glm;
 template<typename T>
 using SharedPtr = STD shared_ptr<T>;

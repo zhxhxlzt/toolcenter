@@ -143,6 +143,8 @@
     <None Include="shaders\diffuse.vert" />
     <None Include="shaders\light.frag" />
     <None Include="shaders\light.vert" />
+    <None Include="shaders\outline.frag" />
+    <None Include="shaders\outline.vert" />
     <None Include="shaders\pointshadowmap.frag" />
     <None Include="shaders\pointshadowmap.geom" />
     <None Include="shaders\pointshadowmap.vert" />

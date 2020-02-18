@@ -106,7 +106,8 @@ namespace yk
 		mat4 Model()
 		{
 			mat4 model(1);
-			model = glm::translate(model, m_position);
+			vec3 pos = position();
+			model = glm::translate(model, pos);
 			model = glm::scale(model, m_scale);
 			model *= mat4_cast(m_rotation);
 			return model;

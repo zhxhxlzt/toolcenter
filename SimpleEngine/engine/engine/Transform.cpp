@@ -4,7 +4,7 @@ using namespace glm;
 using namespace yk;
 
 const vec3 Transform::zero = vec3(0, 0, 0);
-const vec3 Transform::sforward = vec3(0, 0, -1);
+const vec3 Transform::sforward = vec3(0, 0, 1);
 const vec3 Transform::sright = vec3(1, 0, 0);
 const vec3 Transform::sup = vec3(0, 1, 0);
 

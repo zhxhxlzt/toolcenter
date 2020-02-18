@@ -30,4 +30,5 @@ void main()
 	FragPos = vec3(model * vec4(aPos, 1));
 	FragPosLightSpace = lightSpaceMatrix * (model * vec4(aPos, 1));
 	gl_Position = proj * view * model * vec4(aPos.x, aPos.y, aPos.z, 1.0);
+	//gl_Position = pos + vec4(0, 0, 1, 0);
 }

@@ -19,6 +19,7 @@ SharedPtr<GameObject> getBox();
 SharedPtr<GameObject> getCubeDebugBox();
 SharedPtr<GameObject> getShadowDebug();
 SharedPtr<GameObject> getCamera();
+SharedPtr<Material> getOutlineMat();
 
 SharedPtr<Scene> getTestScene()
 {
@@ -33,39 +34,24 @@ SharedPtr<Scene> getTestScene()
 
 
     // debug cube map shadow
-    //auto debugCube = getCubeDebugBox();
-    //debugCube->transform()->translate(vec3(0, 10, 0));
-    //debugCube->transform()->scale() *= vec3(5, 5, 5);
+    /*auto debugCube = getCubeDebugBox();
+    debugCube->transform()->translate(vec3(0, 10, 0));
+    debugCube->transform()->scale() *= vec3(5, 5, 5);*/
 
     // 正方体
     auto box = getBox();
+    //box->getComponent<MeshRenderer>()->materials.push_back(getOutlineMat());
+
     auto box2 = getBox();
-    auto box3 = getBox();
-    auto box4 = getBox();
-    auto box5 = getBox();
-    box2->transform()->translate(vec3(1.5f, 0, 0));
-    box3->transform()->translate(vec3(8.0f, 0, 0));
-    box4->transform()->translate(vec3(5, 5, -5));
-    box5->transform()->translate(vec3(1, 8, -7));
-    //light->addComponent<LightRotateAround>();
-    //light->getComponent<LightRotateAround>()->target = box->transform();
-    pointLight->addComponent<LightRotateAround>()->target = box->transform();
+    box2->transform()->translate(vec3(3, 0, 1));
+    auto m = box2->getComponent<MeshRenderer>();
+    m->materials.push_back(getOutlineMat());
+    //m->material = getOutlineMat();
+    /*auto box2 = getBox();
+    auto box3 = getBox();*/
     // 地板
-    auto plane = getPlane();
-    plane->transform()->translate(vec3(.0f, -0.51f, 0));
-    plane->transform()->scale() *= vec3(50, 0.2f, 50);
-    auto plane2 = getBox();
-    plane2->transform()->scale() *= vec3(1.0f, 50.0f, 50);
-    plane2->transform()->translate(vec3(10, 0, 0));
-    auto plane3 = getBox();
-    plane3->transform()->scale() *= vec3(50, 50, 0.2f);
-    plane3->transform()->translate(vec3(0, 0, -10));
-    auto plane4 = getBox();
-    plane4->transform()->scale() *= vec3(0.2f, 50, 50.0f);
-    plane4->transform()->translate(vec3(-10, 0, 0));
-    auto plane5 = getBox();
-    plane5->transform()->scale() *= vec3(50.0f, 0.2f, 50.0f);
-    plane5->transform()->translate(vec3(0, 20, 0));
+    //auto plane = getPlane();
+    //plane->transform()->scale() *= vec3(50, 1, 50);
 
 	// 相机
     auto camera = getCamera();
@@ -366,8 +352,16 @@ SharedPtr<GameObject> getShadowDebug()
 SharedPtr<GameObject> getCamera()
 {
     auto camera = GameObject::create();
-    camera->transform()->translate(vec3(0, 0, 3));
+    camera->transform()->translate(vec3(0, 0, -3));
     camera->addComponent<Camera>();
     camera->addComponent<CamMoveCtrl>();
     return camera;
+}
+
+SharedPtr<Material> getOutlineMat()
+{
+    auto shader = make_shared<Shader>("shaders/outline.vert", "shaders/outline.frag");
+    auto mat = make_shared<Material>(shader);
+    mat->renderQueue = 2000;
+    return mat;
 }

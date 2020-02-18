@@ -172,13 +172,13 @@ void RenderMgr::renderPointShadow()
     shader->set("lightPos", pointLight->transform()->position());
     shader->set("far_plane", 25.0f);
     glm::mat4 shadowProj = glm::perspective(radians(90.0f), 1.0f, 0.1f, 25.0f);
-    
+    //glm::mat4 shadowProj = glm::perspective(90.0f, 1.0f, 0.1f, 25.0f);  // ÕâÊÇ´íÎóµÄ
     auto lightPos = pointLight->transform()->position();
     std::vector<glm::mat4> shadowTransforms;
     shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(1.0, 0.0, 0.0), glm::vec3(0.0, -1.0, 0.0)));
     shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(-1.0, 0.0, 0.0), glm::vec3(0.0, -1.0, 0.0)));
-    shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(0.0, 1.0, 0.0), glm::vec3(0.0, 0.0, 1.0)));
-    shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(0.0, -1.0, 0.0), glm::vec3(0.0, 0.0, -1.0)));
+    shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(0.0, 1.0, 0.0), glm::vec3(0.0, 0.0, -1.0)));
+    shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(0.0, -1.0, 0.0), glm::vec3(0.0, 0.0, 1.0)));
     shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(0.0, 0.0, 1.0), glm::vec3(0.0, -1.0, 0.0)));
     shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(0.0, 0.0, -1.0), glm::vec3(0.0, -1.0, 0.0)));
     
@@ -213,13 +213,14 @@ void RenderMgr::rendering() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glViewport(0, 0, 800, 600);
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    //glClear(GL_STENCIL_BUFFER_BIT);
     auto shadowTex = make_shared<Texture>(mainCamera->getShadowFrameBuffer().dep);
     auto pointShadowTex = make_shared<Texture>(mainCamera->getPointShadowFrameBuffer().dep, TextureType::TextureCube);
-    for (auto e : scene->getRenderers())
+    for (auto e : getRenderers())
     {
         //e->material->setTexture("_ShadowMap", shadowTex);
-        e->material->setTexture("_PointShadowMap", pointShadowTex);
+        //e->material->setTexture("_PointShadowMap", pointShadowTex);
         e->rendering();
         glCheckError();
     }
@@ -229,4 +230,12 @@ void RenderMgr::rendering() {
         s_window->terminate();
         Application::instance().exit();
     }
+}
+
+SharedPtrVector<Renderer> RenderMgr::getRenderers()
+{
+    auto scene = SceneMgr::getCurrentScene();
+    auto renderers = scene->getRenderers();
+    //sort(renderers.begin(), renderers.end(), [](SharedPtr<Renderer> r) {return r->renderQueue; });
+    return renderers;
 }

@@ -34,7 +34,18 @@ namespace yk
 			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, dep, 0);
 			glDrawBuffer(GL_NONE);
 			glReadBuffer(GL_NONE);
+			
+			glGenTextures(1, &ste);
+			glBindTexture(GL_TEXTURE_2D, ste);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_STENCIL_ATTACHMENT, width, height, 0, GL_STENCIL_ATTACHMENT, GL_INT, NULL);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ste, 0);
+
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		}
+
+		void initStencilBuffer()
+		{
+			
 		}
 
 		void bindDepthMapFrameBuffer()
