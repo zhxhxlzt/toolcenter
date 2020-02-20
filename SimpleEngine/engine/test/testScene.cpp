@@ -20,6 +20,7 @@ SharedPtr<GameObject> getCubeDebugBox();
 SharedPtr<GameObject> getShadowDebug();
 SharedPtr<GameObject> getCamera();
 SharedPtr<Material> getOutlineMat();
+SharedPtr<GameObject> getWindow();
 
 SharedPtr<Scene> getTestScene()
 {
@@ -28,6 +29,10 @@ SharedPtr<Scene> getTestScene()
 
     // 平行光
     //auto light = getDirectionalLight();
+
+    // 地板
+    auto plane = getPlane();
+    plane->transform()->scale() *= vec3(50, 1, 50);
 
     auto pointLight = getPointLight();
     pointLight->transform()->translate(vec3(3, 5, 0));
@@ -46,13 +51,20 @@ SharedPtr<Scene> getTestScene()
     box2->transform()->translate(vec3(3, 0, 1));
     auto m = box2->getComponent<MeshRenderer>();
     m->materials.push_back(getOutlineMat());
-    //m->material = getOutlineMat();
-    /*auto box2 = getBox();
-    auto box3 = getBox();*/
-    // 地板
-    //auto plane = getPlane();
-    //plane->transform()->scale() *= vec3(50, 1, 50);
 
+    auto wnd = getWindow();
+    wnd->transform()->translate(vec3(2, 0, -2));
+
+    auto wnd2 = getWindow();
+    wnd2->transform()->translate(vec3(2.2, 0, -2));
+    wnd2->transform()->rotate(-30, vec3(0, 1, 0));
+
+    auto wnd1 = getWindow();
+    wnd1->transform()->translate(vec3(1.8, 0, -3));
+
+    
+
+  
 	// 相机
     auto camera = getCamera();
 	return scene;
@@ -93,7 +105,7 @@ SharedPtr<Mesh> getQuadMesh()
         vec2(0, 0),
         vec2(0, 1)
     };
-    mesh->triangles = vector<int>{ 0, 1, 3, 1, 2, 3 };
+    mesh->triangles = vector<int>{ 0, 3, 1, 1, 3, 2 };
     mesh->normals = vector<vec3>{
         vec3(0, 1, 0),
         vec3(0, 1, 0),
@@ -121,12 +133,13 @@ SharedPtr<Mesh> getCubeMesh() {
         vec3(-0.5f,  0.5f,  0.5f),
         vec3(-0.5f, -0.5f,  0.5f),
 
-        vec3(-0.5f,  0.5f,  0.5f),
-        vec3(-0.5f,  0.5f, -0.5f),
-        vec3(-0.5f, -0.5f, -0.5f),
-        vec3(-0.5f, -0.5f, -0.5f),
-        vec3(-0.5f, -0.5f,  0.5f),
-        vec3(-0.5f,  0.5f,  0.5f),
+        vec3(-0.5f,  -0.5f,  -0.5f),
+        vec3(-0.5f, 0.5f, -0.5f),
+        vec3(-0.5f,  0.5f, 0.5f),
+        
+        vec3(-0.5f,  0.5f, 0.5f),
+        vec3(-0.5f,  -0.5f,  0.5f),
+        vec3(-0.5f, -0.5f,  -0.5f),
 
         vec3(0.5f,  0.5f,  0.5f), 
         vec3(0.5f,  0.5f, -0.5f), 
@@ -333,6 +346,8 @@ SharedPtr<GameObject> getPlane()
     renderer->material->mainTexture = tx;
     auto mesh = getQuadMesh();
     filter->sharedMesh = mesh;
+    plane->transform()->rotate(180, vec3(1, 0, 0));
+    plane->transform()->translate(vec3(0, -0.6, 0));
     return plane;
 }
 
@@ -364,4 +379,20 @@ SharedPtr<Material> getOutlineMat()
     auto mat = make_shared<Material>(shader);
     mat->renderQueue = 2000;
     return mat;
+}
+
+SharedPtr<GameObject> getWindow()
+{
+    auto window = GameObject::create();
+    auto renderer = window->addComponent<MeshRenderer>();
+    auto filter = window->addComponent<MeshFilter>();
+    auto shader = make_shared<Shader>("shaders/diffuse.vert", "shaders/diffuse.frag");
+    renderer->material = make_shared<Material>(shader);
+    auto tx = make_shared<Texture>();
+    tx->load("blending_transparent_window.png");
+    renderer->material->mainTexture = tx;
+    auto mesh = getQuadMesh();
+    filter->sharedMesh = mesh;
+    window->transform()->rotate(90, vec3(1, 0, 0));
+    return window;
 }

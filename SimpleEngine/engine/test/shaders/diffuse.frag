@@ -122,5 +122,8 @@ void main()
 	vec3	pointDir = FragPos - p.pos;
 	float	curDepth = length(pointDir);
 	vec4	pointLightColor = phongPointLight(1, 1, p.color, p.pos, norm, viewDir);
-	FragColor = pointLightColor * objectColor + ambientColor;
+	//if (objectColor.a < 0.3)
+		//discard;
+	//FragColor = pointLightColor * objectColor + ambientColor;
+	FragColor = objectColor;
 }
