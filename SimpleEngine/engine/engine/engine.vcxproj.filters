@@ -154,6 +154,12 @@
     <ClCompile Include="metainfo\meta_LightRotateAround.cpp" />
     <ClCompile Include="metainfo\meta_Light.cpp" />
     <ClCompile Include="metainfo\meta_Decorate.cpp" />
+    <ClCompile Include="metainfo\meta_SkyBox.cpp" />
+    <ClCompile Include="CtrlBoom.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfo\meta_TextureCube.cpp" />
+    <ClCompile Include="metainfo\meta_CtrlBoom.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -265,6 +271,15 @@
     </ClInclude>
     <ClInclude Include="Decorate.h">
       <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureCube.h">
+      <Filter>asset</Filter>
+    </ClInclude>
+    <ClInclude Include="CtrlBoom.h">
+      <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,9 @@
 #include <AlwaysLootAt.h>
 #include <LightRotateAround.h>
 #include <Light.h>
+#include <SkyBox.h>
+#include <Texture.h>
+#include <CtrlBoom.h>
 
 using namespace yk;
 using namespace std;
@@ -16,23 +19,28 @@ SharedPtr<GameObject> getDirectionalLight();
 SharedPtr<GameObject> getPointLight();
 SharedPtr<GameObject> getPlane();
 SharedPtr<GameObject> getBox();
+SharedPtr<GameObject> getExploreBox();
 SharedPtr<GameObject> getCubeDebugBox();
 SharedPtr<GameObject> getShadowDebug();
 SharedPtr<GameObject> getCamera();
 SharedPtr<Material> getOutlineMat();
 SharedPtr<GameObject> getWindow();
+SharedPtr<GameObject> getSkyBox();
+SharedPtr<Material> getDebugNormalMat();
 
 SharedPtr<Scene> getTestScene()
 {
 	auto scene = STD make_shared<Scene>();
 	SceneMgr::setCurrentScene(scene);
 
+    auto skyBox = getSkyBox();
+
     // 平行光
     //auto light = getDirectionalLight();
 
     // 地板
-    auto plane = getPlane();
-    plane->transform()->scale() *= vec3(50, 1, 50);
+    //auto plane = getPlane();
+    //plane->transform()->scale() *= vec3(50, 1, 50);
 
     auto pointLight = getPointLight();
     pointLight->transform()->translate(vec3(3, 5, 0));
@@ -45,9 +53,16 @@ SharedPtr<Scene> getTestScene()
 
     // 正方体
     auto box = getBox();
+    auto render = box->getComponent<Renderer>();
+    auto debugNormMat = getDebugNormalMat();
+    render->materials.push_back(debugNormMat);
+
+    auto exBox = getExploreBox();
+    exBox->transform()->translate(vec3(3, 0, 0));
+
     //box->getComponent<MeshRenderer>()->materials.push_back(getOutlineMat());
 
-    auto box2 = getBox();
+    /*auto box2 = getBox();
     box2->transform()->translate(vec3(3, 0, 1));
     auto m = box2->getComponent<MeshRenderer>();
     m->materials.push_back(getOutlineMat());
@@ -60,11 +75,8 @@ SharedPtr<Scene> getTestScene()
     wnd2->transform()->rotate(-30, vec3(0, 1, 0));
 
     auto wnd1 = getWindow();
-    wnd1->transform()->translate(vec3(1.8, 0, -3));
+    wnd1->transform()->translate(vec3(1.8, 0, -3));*/
 
-    
-
-  
 	// 相机
     auto camera = getCamera();
 	return scene;
@@ -320,6 +332,107 @@ SharedPtr<GameObject> getBox()
     filter->sharedMesh = mesh;
     return cube;
 }
+SharedPtr<GameObject> getExploreBox()
+{
+    auto cube = GameObject::create();
+    auto renderer = cube->addComponent<MeshRenderer>();
+    auto filter = cube->addComponent<MeshFilter>();
+    auto shader = make_shared<Shader>("shaders/vanish.vert", "shaders/vanish.frag", "shaders/vanish.geom");
+    shader->name = "explosion shader";
+    renderer->material = make_shared<Material>(shader);
+    auto tx = make_shared<Texture>();
+    tx->load("container.jpg");
+    renderer->material->mainTexture = tx;
+    auto mesh = getCubeMesh();
+    filter->sharedMesh = mesh;
+
+    auto boom = cube->addComponent<CtrlBoom>();
+    boom->distance = 1;
+    return cube;
+}
+
+static SharedPtr<Mesh> getSkyBoxMesh()
+{
+    auto mesh = make_shared<Mesh>();
+    mesh->vertices = vector<vec3>{
+        vec3(-0.5f, -0.5f,  0.5f),  // +z
+        vec3(0.5f, -0.5f,  0.5f),
+        vec3(0.5f,  0.5f,  0.5f),
+        vec3(0.5f,  0.5f,  0.5f),
+        vec3(-0.5f,  0.5f,  0.5f),
+        vec3(-0.5f, -0.5f,  0.5f),
+
+        vec3(0.5f, -0.5f, -0.5f),  // -z
+        vec3(-0.5f, -0.5f, -0.5f),
+        vec3(-0.5f,  0.5f, -0.5f),
+        vec3(-0.5f,  0.5f, -0.5f),
+        vec3(0.5f,  0.5f, -0.5f),
+        vec3(0.5f, -0.5f, -0.5f),
+
+        vec3(-0.5f,  0.5f,  0.5f),  // +y
+        vec3(0.5f,  0.5f,  0.5f),
+        vec3(0.5f,  0.5f, -0.5f),
+        vec3(0.5f,  0.5f, -0.5f),
+        vec3(-0.5f,  0.5f, -0.5f),
+        vec3(-0.5f,  0.5f,  0.5f),
+
+        vec3(-0.5f, -0.5f, -0.5f),  // -y
+        vec3(0.5f, -0.5f, -0.5f),
+        vec3(0.5f, -0.5f,  0.5f),
+        vec3(0.5f, -0.5f,  0.5f),
+        vec3(-0.5f, -0.5f, -0.5f),
+        vec3(-0.5f, -0.5f,  0.5f),
+
+        vec3(0.5f, -0.5f,  0.5f),  // +x
+        vec3(0.5f, -0.5f, -0.5f),
+        vec3(0.5f,  0.5f, -0.5f),
+        vec3(0.5f,  0.5f, -0.5f),
+        vec3(0.5f,  0.5f,  0.5f),
+        vec3(0.5f, -0.5f,  0.5f),
+
+        vec3(-0.5f, -0.5f, -0.5f),  // -x
+        vec3(-0.5f, -0.5f,  0.5f),
+        vec3(-0.5f,  0.5f,  0.5f),
+        vec3(-0.5f,  0.5f,  0.5f),
+        vec3(-0.5f,  0.5f, -0.5f),
+        vec3(-0.5f, -0.5f, -0.5f),
+    };
+    for (int i = 0; i < mesh->vertices.size(); i++)
+    {
+        mesh->triangles.push_back(i);
+    }
+    mesh->setupMesh();
+    return mesh;
+}
+
+SharedPtr<GameObject> getSkyBox()
+{
+    glCheckError();
+
+    auto cube = GameObject::create();
+    auto filter = cube->addComponent<MeshFilter>();
+    auto mesh = getSkyBoxMesh();
+    filter->sharedMesh = mesh;
+    glCheckError();
+    auto skyBoxComp = cube->addComponent<SkyBox>();
+    glCheckError();
+    auto shader = make_shared<Shader>("shaders/skybox.vert", "shaders/skybox.frag");
+    glCheckError();
+    glCheckError();
+    auto material = make_shared<Material>(shader);
+    auto t = make_shared<Texture>(TextureType::TextureCube);
+    t->initCubeMap();
+    t->loadCube(vector<string>{"skybox/right.jpg", "skybox/left.jpg", "skybox/top.jpg", "skybox/bottom.jpg", "skybox/front.jpg", "skybox/back.jpg"});
+    //auto id = Texture::loadCubemap(vector<string>{"skybox/right.jpg", "skybox/left.jpg", "skybox/top.jpg", "skybox/bottom.jpg", "skybox/front.jpg", "skybox/back.jpg"});
+    //t->setTextureID(id);
+    
+    material->setTexture("_SkyBoxA", t);
+    auto t0 = make_shared<Texture>();
+    t0->load("skybox/right.jpg");
+    material->mainTexture = t0;
+    skyBoxComp->material = material;
+    return cube;
+}
 
 SharedPtr<GameObject> getCubeDebugBox()
 {
@@ -395,4 +508,11 @@ SharedPtr<GameObject> getWindow()
     filter->sharedMesh = mesh;
     window->transform()->rotate(90, vec3(1, 0, 0));
     return window;
+}
+
+SharedPtr<Material> getDebugNormalMat()
+{
+    auto shader = make_shared<Shader>("shaders/debugNormal.vert", "shaders/debugNormal.frag", "shaders/debugNormal.geom");
+    auto mat = make_shared<Material>(shader);
+    return move(mat);
 }

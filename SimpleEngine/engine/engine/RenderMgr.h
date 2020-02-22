@@ -28,6 +28,7 @@ namespace yk
 		static void setLightSpaceMatrix(mat4 mat);
 		static void renderShadowMap();
 		static void renderPointShadow();
+		static void renderSkyBox();
 		static SharedPtrVector<Renderer> getRenderers();
 	};
 }

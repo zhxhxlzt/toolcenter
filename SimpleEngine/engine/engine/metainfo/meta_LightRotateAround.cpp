@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject LightRotateAround::s_metaObject = MetaObject{ "LightRotateAround", "MonoBehaviour", 12, 16};
+MetaObject LightRotateAround::s_metaObject = MetaObject{ "LightRotateAround", "MonoBehaviour", 13, 17};

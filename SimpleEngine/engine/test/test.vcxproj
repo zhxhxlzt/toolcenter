@@ -139,6 +139,9 @@
     <None Include="engine_debug.props" />
     <None Include="shaders\debugCubemap.frag" />
     <None Include="shaders\debugCubemap.vert" />
+    <None Include="shaders\debugNormal.frag" />
+    <None Include="shaders\debugNormal.geom" />
+    <None Include="shaders\debugNormal.vert" />
     <None Include="shaders\diffuse.frag" />
     <None Include="shaders\diffuse.vert" />
     <None Include="shaders\light.frag" />
@@ -152,6 +155,11 @@
     <None Include="shaders\screen.vert" />
     <None Include="shaders\shadowmap.frag" />
     <None Include="shaders\shadowmap.vert" />
+    <None Include="shaders\skybox.frag" />
+    <None Include="shaders\skybox.vert" />
+    <None Include="shaders\vanish.frag" />
+    <None Include="shaders\vanish.geom" />
+    <None Include="shaders\vanish.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

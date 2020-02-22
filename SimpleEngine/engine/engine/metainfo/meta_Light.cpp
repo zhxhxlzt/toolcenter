@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject Light::s_metaObject = MetaObject{ "Light", "Behaviour", 11, 3};
+MetaObject Light::s_metaObject = MetaObject{ "Light", "Behaviour", 12, 3};

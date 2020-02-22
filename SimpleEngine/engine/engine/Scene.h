@@ -8,6 +8,7 @@ namespace yk
 	class Camera;
 	class Renderer;
 	class MonoBehaviour;
+	class SkyBox;
 	class Scene
 	{
 	public:
@@ -26,6 +27,7 @@ namespace yk
 		SharedPtrVector<MonoBehaviour> getMonoBehaviours() { return m_monoBehaviours; }
 		SharedPtrVector<Light> getLights() { return m_lights; }
 		SharedPtr<Camera> mainCamera;
+		SharedPtr<SkyBox> skyBox;
 
 	private:
 		SharedPtrVector<GameObject> m_rootGameObjects;

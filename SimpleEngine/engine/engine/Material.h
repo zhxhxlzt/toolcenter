@@ -12,6 +12,7 @@ namespace yk
 		SharedPtr<Texture> mainTexture;
 		void setShaderTexture(SharedPtr<Shader> shader);
 		void setTexture(string name, SharedPtr<Texture> tex);
+		SharedPtr<Texture> getTexture(string name) { return m_textures[name]; }
 		unsigned int renderQueue = 1000;
 	private:
 		STD map<const string, SharedPtr<Texture>> m_textures;

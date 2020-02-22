@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject CamMoveCtrl::s_metaObject = MetaObject{ "CamMoveCtrl", "MonoBehaviour", 5, 16};
+MetaObject CamMoveCtrl::s_metaObject = MetaObject{ "CamMoveCtrl", "MonoBehaviour", 5, 17};

@@ -11,11 +11,13 @@ namespace yk
 		static void addNewMonoBehaviours(SharedPtr<MonoBehaviour> mb) { m_newMonoBehaviours.push_back(mb); }
 		static void update()
 		{
-			for (auto& mb : m_newMonoBehaviours)
-				mb->Start();
-			m_newMonoBehaviours.clear();
-
 			auto scene = SceneMgr::getCurrentScene();
+			for (auto& mb : m_newMonoBehaviours)
+			{
+				mb->Start();
+				scene->AddMonoBehaviour(mb);
+			}
+			m_newMonoBehaviours.clear();
 			for (auto& mb : scene->getMonoBehaviours())
 			{
 				mb->Update();
@@ -23,10 +25,6 @@ namespace yk
 		}
 		static void LateUpdate()
 		{
-			for (auto& mb : m_newMonoBehaviours)
-				mb->Start();
-			m_newMonoBehaviours.clear();
-
 			auto scene = SceneMgr::getCurrentScene();
 			for (auto& mb : scene->getMonoBehaviours())
 			{

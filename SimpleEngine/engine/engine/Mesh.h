@@ -52,6 +52,7 @@ namespace yk
 		}
 	private:
 		friend class MeshRenderer;
+		friend class RenderMgr;
 		void draw() {
 			glBindVertexArray(m_vao);
 			glDrawElements(GL_TRIANGLES, triangles.size(), GL_UNSIGNED_INT, 0);

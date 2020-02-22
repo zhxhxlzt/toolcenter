@@ -5,6 +5,7 @@
 #include "RenderMgr.h"
 #include "ScriptMgr.h"
 #include "Window.h"
+#include "GraphicDebug.h"
 namespace yk
 {
 	class GameMgr

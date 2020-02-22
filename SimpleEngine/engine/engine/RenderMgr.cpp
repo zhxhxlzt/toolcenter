@@ -5,6 +5,9 @@
 #include "Texture.h"
 #include "GraphicDebug.h"
 #include "GameObject.h"
+#include "SkyBox.h"
+#include "Mesh.h"
+#include "MeshFilter.h"
 using namespace yk;
 
 SharedPtr<Window> RenderMgr::s_window = nullptr;
@@ -14,6 +17,148 @@ unsigned int RenderMgr::s_directLightsBlock = -1;
 unsigned int RenderMgr::s_lightSpaceMatrixBlock = -1;
 SharedPtr<Shader> RenderMgr::s_shadowShader = nullptr;
 
+static SharedPtr<Mesh> getBoxMesh()
+{
+    auto mesh = make_shared<Mesh>();
+    mesh->vertices = vector<vec3>{
+        vec3(-0.5f, -0.5f,  0.5f),  // +z
+        vec3( 0.5f, -0.5f,  0.5f),
+        vec3( 0.5f,  0.5f,  0.5f),
+        vec3( 0.5f,  0.5f,  0.5f),
+        vec3(-0.5f,  0.5f,  0.5f),
+        vec3(-0.5f, -0.5f,  0.5f),
+
+        vec3( 0.5f, -0.5f, -0.5f),  // -z
+        vec3(-0.5f, -0.5f, -0.5f),
+        vec3(-0.5f,  0.5f, -0.5f),
+        vec3(-0.5f,  0.5f, -0.5f),
+        vec3( 0.5f,  0.5f, -0.5f),
+        vec3( 0.5f, -0.5f, -0.5f),
+
+        vec3(-0.5f,  0.5f,  0.5f),  // +y
+        vec3( 0.5f,  0.5f,  0.5f),
+        vec3( 0.5f,  0.5f, -0.5f),
+        vec3( 0.5f,  0.5f, -0.5f),
+        vec3(-0.5f,  0.5f, -0.5f),
+        vec3(-0.5f, -0.5f,  0.5f),
+
+        vec3(-0.5f, -0.5f, -0.5f),  // -y
+        vec3( 0.5f, -0.5f, -0.5f),
+        vec3( 0.5f, -0.5f,  0.5f),
+        vec3( 0.5f, -0.5f,  0.5f),
+        vec3(-0.5f, -0.5f, -0.5f),
+        vec3(-0.5f, -0.5f,  0.5f),
+
+        vec3( 0.5f, -0.5f,  0.5f),  // +x
+        vec3( 0.5f, -0.5f, -0.5f),
+        vec3( 0.5f,  0.5f, -0.5f),
+        vec3( 0.5f,  0.5f, -0.5f),
+        vec3( 0.5f,  0.5f,  0.5f),
+        vec3( 0.5f, -0.5f,  0.5f),
+
+        vec3(-0.5f, -0.5f, -0.5f),  // -x
+        vec3(-0.5f, -0.5f,  0.5f),
+        vec3(-0.5f,  0.5f,  0.5f),
+        vec3(-0.5f,  0.5f,  0.5f),
+        vec3(-0.5f,  0.5f, -0.5f),
+        vec3(-0.5f, -0.5f, -0.5f),
+    };
+
+    mesh->uv = vector<vec2>{
+        vec2(0.0f, 0.0f),
+        vec2(1.0f, 0.0f),
+        vec2(1.0f, 1.0f),
+        vec2(1.0f, 1.0f),
+        vec2(0.0f, 1.0f),
+        vec2(0.0f, 0.0f),
+
+        vec2(0.0f, 0.0f),
+        vec2(1.0f, 0.0f),
+        vec2(1.0f, 1.0f),
+        vec2(1.0f, 1.0f),
+        vec2(0.0f, 1.0f),
+        vec2(0.0f, 0.0f),
+
+        vec2(1.0f, 0.0f),
+        vec2(1.0f, 1.0f),
+        vec2(0.0f, 1.0f),
+        vec2(0.0f, 1.0f),
+        vec2(0.0f, 0.0f),
+        vec2(1.0f, 0.0f),
+
+        vec2(1.0f, 0.0f),
+        vec2(1.0f, 1.0f),
+        vec2(0.0f, 1.0f),
+        vec2(0.0f, 1.0f),
+        vec2(0.0f, 0.0f),
+        vec2(1.0f, 0.0f),
+
+        vec2(0.0f, 1.0f),
+        vec2(1.0f, 1.0f),
+        vec2(1.0f, 0.0f),
+        vec2(1.0f, 0.0f),
+        vec2(0.0f, 0.0f),
+        vec2(0.0f, 1.0f),
+
+        vec2(0.0f, 1.0f),
+        vec2(1.0f, 1.0f),
+        vec2(1.0f, 0.0f),
+        vec2(1.0f, 0.0f),
+        vec2(0.0f, 0.0f),
+        vec2(0.0f, 1.0f)
+    };
+
+    mesh->normals = vector<vec3>{
+        vec3(0.0f,  0.0f, -1.0f),
+        vec3(0.0f,  0.0f, -1.0f),
+        vec3(0.0f,  0.0f, -1.0f),
+        vec3(0.0f,  0.0f, -1.0f),
+        vec3(0.0f,  0.0f, -1.0f),
+        vec3(0.0f,  0.0f, -1.0f),
+
+        vec3(0.0f,  0.0f,  1.0f),
+        vec3(0.0f,  0.0f,  1.0f),
+        vec3(0.0f,  0.0f,  1.0f),
+        vec3(0.0f,  0.0f,  1.0f),
+        vec3(0.0f,  0.0f,  1.0f),
+        vec3(0.0f,  0.0f,  1.0f),
+
+        vec3(-1.0f,  0.0f,  0.0f),
+        vec3(-1.0f,  0.0f,  0.0f),
+        vec3(-1.0f,  0.0f,  0.0f),
+        vec3(-1.0f,  0.0f,  0.0f),
+        vec3(-1.0f,  0.0f,  0.0f),
+        vec3(-1.0f,  0.0f,  0.0f),
+
+        vec3(1.0f,  0.0f,  0.0f),
+        vec3(1.0f,  0.0f,  0.0f),
+        vec3(1.0f,  0.0f,  0.0f),
+        vec3(1.0f,  0.0f,  0.0f),
+        vec3(1.0f,  0.0f,  0.0f),
+        vec3(1.0f,  0.0f,  0.0f),
+
+        vec3(0.0f, -1.0f,  0.0f),
+        vec3(0.0f, -1.0f,  0.0f),
+        vec3(0.0f, -1.0f,  0.0f),
+        vec3(0.0f, -1.0f,  0.0f),
+        vec3(0.0f, -1.0f,  0.0f),
+        vec3(0.0f, -1.0f,  0.0f),
+
+        vec3(0.0f,  1.0f,  0.0f),
+        vec3(0.0f,  1.0f,  0.0f),
+        vec3(0.0f,  1.0f,  0.0f),
+        vec3(0.0f,  1.0f,  0.0f),
+        vec3(0.0f,  1.0f,  0.0f),
+        vec3(0.0f,  1.0f,  0.0f)
+    };
+
+    for (int i = 0; i < mesh->vertices.size(); i++)
+    {
+        mesh->triangles.push_back(i);
+    }
+    mesh->setupMesh();
+    return mesh;
+}
 
 void RenderMgr::init() {
     s_window = STD make_shared<Window>();
@@ -43,6 +188,7 @@ void RenderMgr::init() {
     glBindBuffer(GL_UNIFORM_BUFFER, s_lightSpaceMatrixBlock);
     glBufferData(GL_UNIFORM_BUFFER, 64, NULL, GL_STATIC_DRAW);
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
+    glCheckError();
 }
 
 void RenderMgr::setCameraMatrices(SharedPtr<Camera> camera)
@@ -202,13 +348,13 @@ void RenderMgr::rendering() {
     auto scene = SceneMgr::getCurrentScene();
     // 生成阴影贴图
     //renderShadowMap();
-    renderPointShadow();
+    //renderPointShadow();
     // 获取光照信息
     // 获取相机参数
     auto mainCamera = scene->mainCamera;
     setCameraMatrices(mainCamera);
     //setDirectionalLightsBuffer();
-    setPointLightsBuffer();
+    //setPointLightsBuffer();
     // 获取所有Renderer
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glViewport(0, 0, 800, 600);
@@ -224,6 +370,7 @@ void RenderMgr::rendering() {
         e->rendering();
         glCheckError();
     }
+    renderSkyBox();
     s_window->finish();
     if (!res)
     {
@@ -238,4 +385,28 @@ SharedPtrVector<Renderer> RenderMgr::getRenderers()
     auto renderers = scene->getRenderers();
     //sort(renderers.begin(), renderers.end(), [](SharedPtr<Renderer> r) {return r->renderQueue; });
     return renderers;
+}
+
+void RenderMgr::renderSkyBox()
+{
+    glDepthMask(GL_FALSE);
+    glDepthFunc(GL_LEQUAL);
+    auto scene = SceneMgr::getCurrentScene();
+    auto skybox = scene->skyBox;
+    if (!skybox)
+        return;
+    auto mat = skybox->material;
+    auto shader = mat->shader;
+    shader->use();
+    glActiveTexture(GL_TEXTURE0);
+    auto tid = mat->getTexture("_SkyBoxA")->getTextureID();
+    glBindTexture(GL_TEXTURE_CUBE_MAP, tid);
+    //shader->use();
+    //mat->setShaderTexture(shader);
+    auto filter = skybox->gameObject()->getComponent<MeshFilter>();
+    auto mesh = filter->sharedMesh;
+    mesh->draw();
+    glCheckError();
+    glDepthFunc(GL_LESS);
+    glDepthMask(GL_TRUE);
 }

@@ -2,4 +2,4 @@
 
 
 using namespace yk;
-MetaObject CubeMove::s_metaObject = MetaObject{ "CubeMove", "MonoBehaviour", 7, 16};
+MetaObject CubeMove::s_metaObject = MetaObject{ "CubeMove", "MonoBehaviour", 8, 17};

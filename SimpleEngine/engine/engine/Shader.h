@@ -17,7 +17,7 @@ namespace yk
 
 		void init(const char* vCode, const char* fCode, const char* gCode)
 		{
-			glDeleteProgram(m_shaderProgram);
+			//glDeleteProgram(m_shaderProgram);
 			auto vertex = glCreateShader(GL_VERTEX_SHADER);
 			auto frag = glCreateShader(GL_FRAGMENT_SHADER);
 
@@ -63,6 +63,13 @@ namespace yk
 			glUseProgram(m_shaderProgram);
 		}
 
+		void setFloat(const string&& name, float value) const
+		{
+			auto loc = glGetUniformLocation(m_shaderProgram, name.c_str());
+			if (loc != -1)
+				glUniform1f(loc, value);
+		}
+
 		template<typename T>
 		void set(const string && name, T value) const
 		{
@@ -81,9 +88,7 @@ namespace yk
 		template<>
 		void set<float>(const string && name, float value) const
 		{
-			auto loc = glGetUniformLocation(m_shaderProgram, name.c_str());
-			if (loc != -1)
-				glUniform1f(loc, value);
+			setFloat(move(name), value);
 		}
 
 		template<>

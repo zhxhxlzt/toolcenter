@@ -58,5 +58,13 @@
     <None Include="engine_debug.props" />
     <None Include="shaders\outline.vert" />
     <None Include="shaders\outline.frag" />
+    <None Include="shaders\skybox.vert" />
+    <None Include="shaders\skybox.frag" />
+    <None Include="shaders\debugNormal.vert" />
+    <None Include="shaders\debugNormal.frag" />
+    <None Include="shaders\debugNormal.geom" />
+    <None Include="shaders\vanish.vert" />
+    <None Include="shaders\vanish.frag" />
+    <None Include="shaders\vanish.geom" />
   </ItemGroup>
 </Project>

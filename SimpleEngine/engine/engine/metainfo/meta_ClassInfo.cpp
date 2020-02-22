@@ -14,6 +14,7 @@
 #include "Camera.h"
 #include "CamMoveCtrl.h"
 #include "Component.h"
+#include "CtrlBoom.h"
 #include "CubeMove.h"
 #include "Decorate.h"
 #include "GameObject.h"
@@ -26,7 +27,9 @@
 #include "MonoBehaviour.h"
 #include "Object.h"
 #include "Renderer.h"
+#include "SkyBox.h"
 #include "Texture.h"
+#include "TextureCube.h"
 #include "Timer.h"
 #include "TimerMgr.h"
 #include "Transform.h"
@@ -42,6 +45,7 @@ map<string, MetaObject*> MetaObject::metaObjects = {
 	pair<string, MetaObject*>("Camera", &Camera::s_metaObject),
 	pair<string, MetaObject*>("CamMoveCtrl", &CamMoveCtrl::s_metaObject),
 	pair<string, MetaObject*>("Component", &Component::s_metaObject),
+	pair<string, MetaObject*>("CtrlBoom", &CtrlBoom::s_metaObject),
 	pair<string, MetaObject*>("CubeMove", &CubeMove::s_metaObject),
 	pair<string, MetaObject*>("Decorate", &Decorate::s_metaObject),
 	pair<string, MetaObject*>("GameObject", &GameObject::s_metaObject),
@@ -54,7 +58,9 @@ map<string, MetaObject*> MetaObject::metaObjects = {
 	pair<string, MetaObject*>("MonoBehaviour", &MonoBehaviour::s_metaObject),
 	pair<string, MetaObject*>("Object", &Object::s_metaObject),
 	pair<string, MetaObject*>("Renderer", &Renderer::s_metaObject),
+	pair<string, MetaObject*>("SkyBox", &SkyBox::s_metaObject),
 	pair<string, MetaObject*>("Texture", &Texture::s_metaObject),
+	pair<string, MetaObject*>("TextureCube", &TextureCube::s_metaObject),
 	pair<string, MetaObject*>("Timer", &Timer::s_metaObject),
 	pair<string, MetaObject*>("TimerMgr", &TimerMgr::s_metaObject),
 	pair<string, MetaObject*>("Transform", &Transform::s_metaObject),
